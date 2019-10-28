@@ -18,7 +18,6 @@ export async function findOne(
 ): Promise<void> {
   try {
     const chat: IChatModel = await ChatService.findOne(req.params.id);
-    console.log("params:" , req.params);
 
     res.status(200).json(chat);
   } catch (error) {

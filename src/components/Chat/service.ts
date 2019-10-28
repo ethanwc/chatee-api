@@ -18,8 +18,11 @@ const ChatService: IChatService = {
    */
   async findOne(id: string): Promise<IChatModel> {
     try {
-      const validate: Joi.ValidationResult<string> = ChatValidation.find(id);
-
+      const validate: Joi.ValidationResult<{
+        id: string;
+      }> = ChatValidation.find({
+        id
+      });
       if (validate.error) {
         throw new Error(validate.error.message);
       }

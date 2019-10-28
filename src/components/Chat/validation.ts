@@ -17,17 +17,21 @@ class ChatValidation extends Validation {
     super();
   }
 
-  /**
-   * @param {string} id
-   * @returns {Joi.ValidationResult<string>}
+ /**
+   * @param {{ id: string }} body
+   * @returns {Joi.ValidationResult<{ id: string }>}
    * @memberof ChatValidation
    */
-  find(id: string): Joi.ValidationResult<string> {
+  find(body: {
+    id: string;
+  }): Joi.ValidationResult<{
+    id: string;
+  }> {
     const schema: Joi.Schema = Joi.object().keys({
-      id: Joi.string().required()
+      id: this.customJoi.objectId().required()
     });
 
-    return Joi.validate(id, schema);
+    return Joi.validate(body, schema);
   }
 
   /**

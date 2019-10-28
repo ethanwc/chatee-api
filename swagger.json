@@ -111,7 +111,7 @@
     },
     "/v1/chat": {
       "get": {
-        "description": "Get all stored chat in Database that a user is in",
+        "description": "Get all chats that a user is in",
         "tags": [
           "chat"
         ],
@@ -166,8 +166,10 @@
                 "$ref": "#/components/schemas/ChatSchema"
               },
               "example": {
-                "name": "userName",
-                "email": "test.user@mail.com"
+                "members": [
+                  "test.user@mail.com",
+                  "stevejobs@apple.com"
+                ]
               }
             }
           }
@@ -532,7 +534,7 @@
           "message": {
             "type": "string",
             "description": "Error description",
-            "example": "User created"
+            "example": "created"
           }
         }
       }

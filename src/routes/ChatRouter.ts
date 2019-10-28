@@ -13,7 +13,7 @@ const router: Router = Router();
  * @swagger
  * /v1/chat:
  *   get:
- *     description: Get all stored chat in Database that a user is in
+ *     description: Get all chats that a user is in
  *     tags: ["chat"]
  *     security:
  *      - ApiKeyAuth: []
@@ -53,8 +53,7 @@ router.get("/", ChatComponent.findAll);
  *            schema:
  *              $ref: '#/components/schemas/ChatSchema'
  *            example:
- *              name: userName
- *              email: test.user@mail.com
+ *              members: ["test.user@mail.com", "stevejobs@apple.com"]
  *      responses:
  *        201:
  *          description: return created chat
@@ -70,7 +69,7 @@ router.get("/", ChatComponent.findAll);
  *              schema:
  *                $ref: '#/components/schemas/Error'
  */
-router.post("/", ChatComponent.create);
+router.post("/", ChatComponent.insert);
 
 /**
  * GET method route

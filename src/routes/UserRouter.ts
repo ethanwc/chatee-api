@@ -1,5 +1,5 @@
-import { Router } from 'express';
-import { UserComponent } from '../components';
+import { Router } from "express";
+import { UserComponent } from "../components";
 
 /**
  * @constant {express.Router}
@@ -9,7 +9,7 @@ const router: Router = Router();
 /**
  * GET method route
  * @example http://localhost:PORT/v1/users
- * 
+ *
  * @swagger
  * /v1/users:
  *   get:
@@ -32,12 +32,12 @@ const router: Router = Router();
  *              schema:
  *                $ref: '#/components/schemas/Error'
  */
-router.get('/', UserComponent.findAll);
+router.get("/", UserComponent.findAll);
 
 /**
  * POST method route
  * @example http://localhost:PORT/v1/users
- * 
+ *
  * @swagger
  * /v1/users:
  *   post:
@@ -70,12 +70,12 @@ router.get('/', UserComponent.findAll);
  *              schema:
  *                $ref: '#/components/schemas/Error'
  */
-router.post('/', UserComponent.create);
+router.post("/", UserComponent.create);
 
 /**
- * GET method route 
+ * GET method route
  * @example http://localhost:PORT/v1/users/:id
- * 
+ *
  * @swagger
  * /v1/users/{id}:
  *  get:
@@ -99,12 +99,12 @@ router.post('/', UserComponent.create);
  *              oneOf:
  *                - $ref: '#/components/schemas/UserSchema'
  */
-router.get('/:id', UserComponent.findOne);
+router.get("/:id", UserComponent.findOne);
 
 /**
  * DELETE method route
  * @example  http://localhost:PORT/v1/users/:id
- * 
+ *
  * @swagger
  * /v1/users/{id}:
  *  delete:
@@ -128,7 +128,7 @@ router.get('/:id', UserComponent.findOne);
  *              oneOf:
  *                - $ref: '#/components/schemas/UserSchema'
  */
-router.delete('/:id', UserComponent.remove);
+router.delete("/:id", UserComponent.remove);
 
 /**
  * @export {express.Router}

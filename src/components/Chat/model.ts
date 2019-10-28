@@ -6,10 +6,10 @@ import { NextFunction } from "express";
 
 /**
  * @export
- * @interface IUserModel
+ * @interface IChatModel
  * @extends {Document}
  */
-export interface IUserModel extends Document {
+export interface IChatModel extends Document {
   email: string;
   password: string;
   passwordResetToken: string;
@@ -38,7 +38,7 @@ export type AuthToken = {
  * @swagger
  * components:
  *  schemas:
- *    UserSchema:
+ *    ChatSchema:
  *      required:
  *        - email
  *        - name
@@ -61,9 +61,9 @@ export type AuthToken = {
  *    Users:
  *      type: array
  *      items:
- *        $ref: '#/components/schemas/UserSchema'
+ *        $ref: '#/components/schemas/ChatSchema'
  */
-const UserSchema: Schema = new Schema(
+const ChatSchema: Schema = new Schema(
   {
     email: {
       type: String,
@@ -76,7 +76,7 @@ const UserSchema: Schema = new Schema(
     tokens: Array
   },
   {
-    collection: "usermodel",
+    collection: "chatmodel",
     versionKey: false
   }
 ).pre("save", async function(next: NextFunction): Promise<void> {
@@ -101,7 +101,7 @@ const UserSchema: Schema = new Schema(
 /**
  * Method for comparing passwords
  */
-UserSchema.methods.comparePassword = async function(
+ChatSchema.methods.comparePassword = async function(
   candidatePassword: string
 ): Promise<boolean> {
   try {
@@ -119,7 +119,7 @@ UserSchema.methods.comparePassword = async function(
 /**
  * Helper method for getting user's gravatar.
  */
-UserSchema.methods.gravatar = function(size: number): string {
+ChatSchema.methods.gravatar = function(size: number): string {
   if (!size) {
     size = 200;
   }
@@ -134,4 +134,4 @@ UserSchema.methods.gravatar = function(size: number): string {
   return `https://gravatar.com/avatar/${md5}?s=${size}&d=retro`;
 };
 
-export default connections.db.model<IUserModel>("UserModel", UserSchema);
+export default connections.db.model<IChatModel>("ChatModel", ChatSchema);

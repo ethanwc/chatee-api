@@ -11,6 +11,6 @@
             }
         ]
     },
-    "include": ["./src/**/*"],
+    "include": ["./src/**/*", "test/hello-world.spec.ts", "test/hello-world.ts"],
     "exclude": ["node_modules"]
 }

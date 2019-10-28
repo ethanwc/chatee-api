@@ -17,21 +17,37 @@ class ChatValidation extends Validation {
   }
 
   /**
-   * @param {IUserModel} params
-   * @returns {Joi.ValidationResult<IUserModel >}
+   * @param {IChatModel} params
+   * @returns {Joi.ValidationResult<IChatModel >}
    * @memberof ChatValidation
    */
-  createChat(params: IChatModel): Joi.ValidationResult<IChatModel> {
+  insertChat(params: IChatModel): Joi.ValidationResult<IChatModel> {
     const schema: Joi.Schema = Joi.object().keys({
-      name: Joi.string().required(),
-      email: Joi.string()
-        .email({
-          minDomainAtoms: 2
-        })
-        .required()
+        members: Joi.array().required(),
+        createdDate: Joi.date().required()
     });
 
     return Joi.validate(params, schema);
+  }
+
+  
+    /**
+     * @param {{ id: string }} body
+     * @returns {Joi.ValidationResult<{ id: string }>}
+     * @memberof ChatValidation
+     */
+    removeChat(
+      body: {
+          id: string
+      }
+  ): Joi.ValidationResult < {
+      id: string
+  } > {
+      const schema: Joi.Schema = Joi.object().keys({
+          id: this.customJoi.objectId().required()
+      });
+
+      return Joi.validate(body, schema);
   }
 }
 

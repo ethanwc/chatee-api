@@ -4,19 +4,43 @@ import { IChatModel } from "./model";
 import { NextFunction, Request, Response } from "express";
 
 /**
+ * Creates a new Chat between two or more users.
  * @export
  * @param {Request} req
  * @param {Response} res
  * @param {NextFunction} next
  * @returns {Promise < void >}
  */
-export async function createChat(
+export async function insert(
   req: Request,
   res: Response,
   next: NextFunction
 ): Promise<void> {
   try {
-    const chat: IChatModel = await ChatService.createChat(req.body);
+    const chat: IChatModel = await ChatService.insert(req.body);
+
+    res.status(200).json(chat);
+  } catch (error) {
+    next(new HttpError(error.message.status, error.message));
+  }
+}
+
+
+/**
+ * Removes a chat on id.
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ * @returns {Promise < void >}
+ */
+export async function remove(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const chat: IChatModel = await ChatService.remove(req.body);
 
     res.status(200).json(chat);
   } catch (error) {

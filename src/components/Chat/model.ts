@@ -35,7 +35,7 @@ export interface IChatModel extends Document {
  *        lastMessageDate:
  *          type: string
  *          format: date
- *    chats:
+ *    Chats:
  *      type: array
  *      items:
  *        $ref: '#/components/schemas/ChatSchema'

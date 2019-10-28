@@ -281,6 +281,37 @@
   },
   "components": {
     "schemas": {
+      "ChatSchema": {
+        "required": [
+          "members",
+          "createdDate"
+        ],
+        "properties": {
+          "members": {
+            "type": "Array<string>"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "membersTyping": {
+            "type": "Array<string>"
+          },
+          "lastMessage": {
+            "type": "string"
+          },
+          "lastMessageDate": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "chats": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ChatSchema"
+        }
+      },
       "UserSchema": {
         "required": [
           "email",

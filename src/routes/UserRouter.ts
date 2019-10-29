@@ -130,7 +130,82 @@ router.get("/:id", UserComponent.findOne);
  */
 router.delete("/:id", UserComponent.remove);
 
+/**
+ * POST method route
+ * @example http://localhost:PORT/v1/users/addChat
+ *
+ * @swagger
+ * /v1/users:
+ *   post:
+ *      description: Add user to a new chat
+ *      tags: ["users"]
+ *      security:
+ *       - ApiKeyAuth: []
+ *      requestBody:
+ *        description: Chat addition creation request body
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/UserSchema'
+ *            example:
+ *              userid: 1234
+ *              memberid: 1234
+ *      responses:
+ *        200:
+ *          description: return updated user
+ *          content:
+ *            application/json:
+ *              schema:
+ *                oneOf:
+ *                  - $ref: '#/components/schemas/UserSchema'
+ *        default:
+ *          description: unexpected error
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Error'
+ */
 router.post("/addChat", UserComponent.addChat)
+
+
+/**
+ * POST method route
+ * @example http://localhost:PORT/v1/users/removeChat
+ *
+ * @swagger
+ * /v1/users:
+ *   post:
+ *      description: Remove user from a chat
+ *      tags: ["users"]
+ *      security:
+ *       - ApiKeyAuth: []
+ *      requestBody:
+ *        description: Chat removal creation request body
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/UserSchema'
+ *            example:
+ *              userid: 1234
+ *              memberid: 1234
+ *      responses:
+ *        200:
+ *          description: return updated user
+ *          content:
+ *            application/json:
+ *              schema:
+ *                oneOf:
+ *                  - $ref: '#/components/schemas/UserSchema'
+ *        default:
+ *          description: unexpected error
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Error'
+ */
+router.post("/removeChat", UserComponent.removeChat)
 
 
 /**

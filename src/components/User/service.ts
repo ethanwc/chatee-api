@@ -116,11 +116,43 @@ const UserService: IUserService = {
       }
 
       let user: IUserModel = await UserModel.findById(userid);
+      //todo: dup check... dups?
+      // if (!user.chats.includes(chatid)) user.chats = [...user.chats, chatid];
+      let updatedUser = await UserModel.findByIdAndUpdate(userid, user);
 
-      //todo: duplicates
-      //add new chat to user's chats
-      user.chats.push(chatid);
+      console.log(updatedUser.chats);
 
+      return updatedUser;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  /**
+   * @param {string} chatid
+   * @param {string} userid
+   * @returns {Promise < IUserModel >}
+   * @memberof UserService
+   */
+  async removeChat(chatid: string, userid: string): Promise<IUserModel> {
+    try {
+      const validate: Joi.ValidationResult<{
+        chatid: string;
+        userid: string;
+      }> = UserValidation.addChat({
+        chatid,
+        userid
+      });
+
+      if (validate.error) {
+        throw new Error(validate.error.message);
+      }
+
+      let user: IUserModel = await UserModel.findById(userid);
+      //remove chat from user's chats
+      user.chats = user.chats.filter(chat => chat !== chatid);
+
+      //todo: update is off by 1 delayed...
       let updatedUser = await UserModel.findByIdAndUpdate(userid, user);
 
       return updatedUser;

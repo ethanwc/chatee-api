@@ -57,6 +57,22 @@ describe("User", () => {
       })
       .end(done);
   });
+
+  it("remove user from chat", done => {
+    const fakeChat = {
+      chatid: "fakechat1234",
+      userid: userId
+    };
+    request(app)
+      .post("/v1/users/removeChat")
+      .send(fakeChat)
+      .set("x-access-token", global.token)
+      .expect(res => {
+        res.status.should.equal(200);
+        res.body.should.have.property("chats");
+      })
+      .end(done);
+  });
 });
 
 /**

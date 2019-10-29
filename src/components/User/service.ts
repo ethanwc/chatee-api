@@ -4,8 +4,6 @@ import ChatModel, { IChatModel } from "../Chat/model";
 import UserValidation from "./validation";
 import { IUserService } from "./interface";
 import { Types } from "mongoose";
-import { up } from "inquirer/lib/utils/readline";
-import ChatService from "../Chat/service";
 import { ObjectId } from "mongodb";
 
 /**

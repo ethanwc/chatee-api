@@ -14,16 +14,19 @@ export interface IUserModel extends Document {
   password: string;
   passwordResetToken: string;
   passwordResetExpires: Date;
-
-  facebook: string;
+  google: string;
   tokens: AuthToken[];
+  friends: string[];
+  friendRequests: string[];  
   chats: string[];
+  chatRequests: string[];
+  network: IUserModel[]
 
   profile: {
     name: string;
     gender: string;
     location: string;
-    website: string;
+    about: string;
     picture: string;
   };
   comparePassword: (password: string) => Promise<boolean>;
@@ -59,6 +62,14 @@ export type AuthToken = {
  *          format: date
  *        tokens:
  *          type: array
+ *        chats:
+ *          type: array
+ *        friends:
+ *          type: array
+ *        network:
+ *          type: array
+ *        profile:
+ *          type: object
  *    Users:
  *      type: array
  *      items:
@@ -72,7 +83,12 @@ const UserSchema: Schema = new Schema(
       trim: true
     },
     chats: Array<String>(),
+    chatRequests: Array<JSON>(),
+    friends: Array<String>(),
+    friendRequests: Array<String>(),
+    network: Array<IUserModel>(),
     password: String,
+    google: String,
     passwordResetToken: String,
     passwordResetExpires: Date,
     tokens: Array
@@ -121,6 +137,7 @@ UserSchema.methods.comparePassword = async function(
 /**
  * Helper method for getting user's gravatar.
  */
+//todo: delete me
 UserSchema.methods.gravatar = function(size: number): string {
   if (!size) {
     size = 200;

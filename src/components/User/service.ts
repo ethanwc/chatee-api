@@ -1,9 +1,12 @@
 import * as Joi from "joi";
 import UserModel, { IUserModel } from "./model";
+import ChatModel, { IChatModel } from "../Chat/model";
 import UserValidation from "./validation";
 import { IUserService } from "./interface";
 import { Types } from "mongoose";
 import { up } from "inquirer/lib/utils/readline";
+import ChatService from "../Chat/service";
+import { ObjectId } from "mongodb";
 
 /**
  * @export
@@ -11,6 +14,7 @@ import { up } from "inquirer/lib/utils/readline";
  */
 const UserService: IUserService = {
   /**
+   * Should return all information required to initally launch an app.
    * @param {string} id
    * @returns {Promise < IUserModel >}
    * @memberof UserService
@@ -26,9 +30,62 @@ const UserService: IUserService = {
         throw new Error(validate.error.message);
       }
 
-      return await UserModel.findOne({
-        _id: Types.ObjectId(id)
+      const User: IUserModel = await UserModel.findById(id);
+      //store member ids
+      let networkMembers: string[] = [];
+
+      /**
+       * Find all chats and associated users
+       */
+
+      //convert chats to object ids for db lookup
+      let userChats: Array<ObjectId> = [];
+      User.chats.forEach(element => {
+        userChats.push(new ObjectId(element));
       });
+      //also look in chat requests
+      User.chatRequests.forEach(element => {
+        userChats.push(new ObjectId(element));
+      });
+
+      //lookup chats user is in
+      let chats: Array<IChatModel> = await ChatModel.find({
+        _id: {
+          $in: userChats
+        }
+      });
+
+      //add users from chat to network
+      chats.forEach(element => {
+        networkMembers = [...networkMembers, ...element.members];
+      });
+
+      /**
+       * Find unique users
+       */
+
+      //get all friends / pending friends
+      networkMembers = [
+        ...networkMembers,
+        ...User.friends,
+        ...User.friendRequests
+      ];
+      //convert to set to remove duplicates
+      let uniqueUsers: Set<string> = new Set(networkMembers);
+      //convert to ObjectIds
+      let uniqueUserObjectIds: Array<ObjectId> = [];
+      uniqueUsers.forEach(element => {
+        uniqueUserObjectIds.push(new ObjectId(element));
+      });
+      //todo: only select needed info, not password...
+      //find all unique objectids(users)
+      User.network = await UserModel.find({
+        _id: {
+          $in: uniqueUserObjectIds
+        }
+      });
+
+      return User;
     } catch (error) {
       throw new Error(error.message);
     }

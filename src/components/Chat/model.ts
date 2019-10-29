@@ -1,5 +1,6 @@
 import * as connections from "../../config/connection/connection";
 import { Document, Schema } from "mongoose";
+import { IMessageModel } from "../Message/model";
 
 /**
  * @export
@@ -10,6 +11,7 @@ export interface IChatModel extends Document {
   members: Array<string>;
   membersTyping: Array<string>;
   createdDate: Date;
+  messages: Array<IMessageModel>;
   lastMessage: string;
   lastMessageDate: Date;
 }

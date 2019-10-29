@@ -6,17 +6,11 @@ import { IUserModel } from "./model";
  */
 export interface IUserService {
   /**
-   * @returns {Promise<IUserModel[]>}
-   * @memberof IUserService
-   */
-  findAll(): Promise<IUserModel[]>;
-
-  /**
-   * @param {string} code
+   * @param {string} id
    * @returns {Promise<IUserModel>}
    * @memberof IUserService
    */
-  findOne(code: string): Promise<IUserModel>;
+  findOne(id: string): Promise<IUserModel>;
 
   /**
    * @param {IUserModel} IUserModel

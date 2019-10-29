@@ -33,12 +33,12 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "user successfuly signed in",
+          "201": {
+            "description": "user successfuly signed up",
             "content": {
               "appication/json": {
                 "example": {
-                  "status": 200,
+                  "status": 201,
                   "logged": true,
                   "message": "Sign in successfull!!"
                 }
@@ -110,43 +110,6 @@
       }
     },
     "/v1/chat": {
-      "get": {
-        "description": "Get all chats that a user is in",
-        "tags": [
-          "chat"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "An array of chats",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/chat"
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
       "post": {
         "description": "Create new chat",
         "tags": [
@@ -281,45 +244,8 @@
       }
     },
     "/v1/users": {
-      "get": {
-        "description": "Get all stored users in Database",
-        "tags": [
-          "users"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "An array of users",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Users"
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
       "post": {
-        "description": "Create new User",
+        "description": "Remove user from a chat",
         "tags": [
           "users"
         ],
@@ -329,7 +255,7 @@
           }
         ],
         "requestBody": {
-          "description": "user creation request body",
+          "description": "Chat removal creation request body",
           "required": true,
           "content": {
             "application/json": {
@@ -337,15 +263,15 @@
                 "$ref": "#/components/schemas/UserSchema"
               },
               "example": {
-                "name": "userName",
-                "email": "test.user@mail.com"
+                "userid": 1234,
+                "memberid": 1234
               }
             }
           }
         },
         "responses": {
-          "201": {
-            "description": "return created user",
+          "200": {
+            "description": "return updated user",
             "content": {
               "application/json": {
                 "schema": {

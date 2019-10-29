@@ -24,7 +24,8 @@
     "build": "tsc --skipLibCheck",
     "start": "tsc --skipLibCheck && node ./build/config/server/index.js",
     "ts:watch": "tsc -w",
-    "test": "mocha -r ts-node/register test/auth.js test/user.js test/chat.js"
+    "test": "mocha -r ts-node/register test/auth.js test/user.js test/chat.js",
+    "doc": "swagger-jsdoc -d swaggerDef.js -o swagger.json"
   },
   "files": [
     "src"

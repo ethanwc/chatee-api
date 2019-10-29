@@ -25,12 +25,12 @@ const router: Router = Router();
  *            email: test.user@mail.com
  *            password: test_test
  *    responses:
- *      200:
- *        description: user successfuly signed in
+ *      201:
+ *        description: user successfuly signed up
  *        content:
  *          appication/json:
  *            example:
- *              status: 200
+ *              status: 201
  *              logged: true
  *              message: Sign in successfull!!
  *      400:

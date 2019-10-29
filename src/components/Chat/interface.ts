@@ -26,8 +26,4 @@ export interface IChatService {
    * @memberof IChatModel
    */
   remove(id: string): Promise<IChatModel>;
-  //todo: set typing/nottyping
-  //todo: user -> add to chats
-  //todo: all of messages
-  //todo: testing?
 }

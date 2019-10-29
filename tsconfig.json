@@ -1,16 +1,17 @@
 {
-    "compilerOptions": {
-        "outDir": "./build/",
-        "module": "commonjs",
-        "noImplicitAny": true,
-        "target": "es6",
-        "sourceMap": true,
-        "plugins": [
-            {
-                "name": "tslint-language-service"
-            }
-        ]
-    },
-    "include": ["./src/**/*", "test/hello-world.spec.ts", "test/hello-world.ts"],
-    "exclude": ["node_modules"]
+  "compilerOptions": {
+    "outDir": "./build/",
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "lib": ["dom", "es7"],
+    "target": "es6",
+    "sourceMap": true,
+    "plugins": [
+      {
+        "name": "tslint-language-service"
+      }
+    ]
+  },
+  "include": ["./src/**/*", "test/hello-world.spec.ts", "test/hello-world.ts"],
+  "exclude": ["node_modules"]
 }

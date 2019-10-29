@@ -18,7 +18,7 @@ describe('Authentication', () => {
             .send(user)
             .expect('Content-type', /json/)
             .expect((res) => {
-                res.body.status.should.equal(200);
+                res.body.status.should.equal(201);
                 res.body.logged.should.equal(true);
                 res.body.message.should.be.a('string');
                 global.token = res.body.token;

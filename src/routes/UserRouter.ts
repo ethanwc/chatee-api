@@ -7,34 +7,6 @@ import { UserComponent } from "../components";
 const router: Router = Router();
 
 /**
- * GET method route
- * @example http://localhost:PORT/v1/users
- *
- * @swagger
- * /v1/users:
- *   get:
- *     description: Get all stored users in Database
- *     tags: ["users"]
- *     security:
- *      - ApiKeyAuth: []
- *     responses:
- *       200:
- *         description: An array of users
- *         content:
- *           application/json:
- *             schema:
- *               oneOf:
- *                - $ref: '#/components/schemas/Users'
- *       default:
- *          description: unexpected error
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schemas/Error'
- */
-router.get("/", UserComponent.findAll);
-
-/**
  * POST method route
  * @example http://localhost:PORT/v1/users
  *
@@ -166,8 +138,7 @@ router.delete("/:id", UserComponent.remove);
  *              schema:
  *                $ref: '#/components/schemas/Error'
  */
-router.post("/addChat", UserComponent.addChat)
-
+router.post("/addChat", UserComponent.addChat);
 
 /**
  * POST method route
@@ -205,8 +176,7 @@ router.post("/addChat", UserComponent.addChat)
  *              schema:
  *                $ref: '#/components/schemas/Error'
  */
-router.post("/removeChat", UserComponent.removeChat)
-
+router.post("/removeChat", UserComponent.removeChat);
 
 /**
  * @export {express.Router}

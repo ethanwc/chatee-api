@@ -11,18 +11,6 @@ import { up } from "inquirer/lib/utils/readline";
  */
 const UserService: IUserService = {
   /**
-   * @returns {Promise < IUserModel[] >}
-   * @memberof UserService
-   */
-  async findAll(): Promise<IUserModel[]> {
-    try {
-      return await UserModel.find({});
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  },
-
-  /**
    * @param {string} id
    * @returns {Promise < IUserModel >}
    * @memberof UserService
@@ -115,12 +103,8 @@ const UserService: IUserService = {
         throw new Error(validate.error.message);
       }
 
-      let user: IUserModel = await UserModel.findById(userid);
-      //todo: dup check... dups?
-      // if (!user.chats.includes(chatid)) user.chats = [...user.chats, chatid];
-      let updatedUser = await UserModel.findByIdAndUpdate(userid, user);
-
-      console.log(updatedUser.chats);
+      await UserModel.update({ _id: userid }, { $addToSet: { chats: chatid } });
+      let updatedUser = await UserModel.findById(userid);
 
       return updatedUser;
     } catch (error) {
@@ -148,12 +132,9 @@ const UserService: IUserService = {
         throw new Error(validate.error.message);
       }
 
-      let user: IUserModel = await UserModel.findById(userid);
-      //remove chat from user's chats
-      user.chats = user.chats.filter(chat => chat !== chatid);
+      await UserModel.update({ _id: userid }, { $pull: { chats: chatid } });
 
-      //todo: update is off by 1 delayed...
-      let updatedUser = await UserModel.findByIdAndUpdate(userid, user);
+      let updatedUser = await UserModel.findById(userid);
 
       return updatedUser;
     } catch (error) {

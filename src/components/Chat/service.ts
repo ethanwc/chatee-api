@@ -2,10 +2,6 @@ import * as Joi from "joi";
 import ChatModel, { IChatModel } from "./model";
 import ChatValidation from "./validation";
 import { IChatService } from "./interface";
-import { remove } from "../User";
-import { Types } from "mongoose";
-import { IUserModel } from "../User/model";
-import { ObjectID, ObjectId } from "bson";
 
 /**
  * @export

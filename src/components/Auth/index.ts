@@ -20,7 +20,7 @@ export async function signup(req: Request, res: Response, next: NextFunction): P
         });
         
         res.json({
-            status: 200,
+            status: 201,
             logged: true,
             token: token,
             message: 'Sign in successfull'

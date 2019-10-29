@@ -7,6 +7,7 @@ chai.should();
 /**
  * API tests
  */
+
 describe('API', () => {
     it('get all users', (done) => {
         request(app)
@@ -44,6 +45,6 @@ after(async () => {
     try {
         await UserModel.collection.drop();
     } catch (error) {
-        console.log('Something went wrong after tests, seems your database doesnt cleaned');
+        console.log('Something went wrong after tests, seems your database doesnt cleaned', error);
     }
 });

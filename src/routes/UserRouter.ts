@@ -107,7 +107,7 @@ router.delete("/:id", UserComponent.remove);
  * @example http://localhost:PORT/v1/users/addChat
  *
  * @swagger
- * /v1/users:
+ * /v1/users/addChat:
  *   post:
  *      description: Add user to a new chat
  *      tags: ["users"]
@@ -145,7 +145,7 @@ router.post("/addChat", UserComponent.addChat);
  * @example http://localhost:PORT/v1/users/removeChat
  *
  * @swagger
- * /v1/users:
+ * /v1/users/removeChat:
  *   post:
  *      description: Remove user from a chat
  *      tags: ["users"]

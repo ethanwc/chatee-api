@@ -31,4 +31,20 @@ export interface IUserService {
    * @memberof IUserService
    */
   remove(id: string): Promise<IUserModel>;
+
+  /**
+   * @param {string} chatid
+   * @param {string} userid    *
+   * @returns {Promise<IUserModel>}
+   * @memberof IUserService
+   */
+  addChat(chatid: string, userid: string): Promise<IUserModel>;
+
+  /**
+   * @param {string} chatid
+   * @param {string} userid
+   * @returns {Promise<IUserModel>}
+   * @memberof IUserService
+   */
+  // removeChat(id: string): Promise<IUserModel>;
 }

@@ -5,6 +5,7 @@ import { IChatService } from "./interface";
 import { remove } from "../User";
 import { Types } from "mongoose";
 import { IUserModel } from "../User/model";
+import { ObjectID, ObjectId } from "bson";
 
 /**
  * @export
@@ -28,29 +29,6 @@ const ChatService: IChatService = {
       }
 
       return await ChatModel.findById(id);
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  },
-  /**
-   * @param {IChatModel} chat
-   * @returns {Promise < IChatModel[] >}
-   * @memberof ChatService
-   */
-  async findAll(body: IUserModel): Promise<IChatModel[]> {
-    try {
-      const validate: Joi.ValidationResult<IUserModel> = ChatValidation.findAll(
-        body
-      );
-
-      if (validate.error) {
-        throw new Error(validate.error.message);
-      }
-      //todo: find all chats a member is in.
-      const chats: IChatModel[] = await ChatModel.find();
-      return chats;
-
-      // return chats;
     } catch (error) {
       throw new Error(error.message);
     }
@@ -96,9 +74,7 @@ const ChatService: IChatService = {
         throw new Error(validate.error.message);
       }
 
-      const chat: IChatModel = await ChatModel.findOneAndRemove({
-        _id: Types.ObjectId(id)
-      });
+      const chat: IChatModel = await ChatModel.findByIdAndRemove(id);
 
       return chat;
     } catch (error) {

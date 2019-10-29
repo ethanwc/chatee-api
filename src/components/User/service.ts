@@ -3,6 +3,7 @@ import UserModel, { IUserModel } from "./model";
 import UserValidation from "./validation";
 import { IUserService } from "./interface";
 import { Types } from "mongoose";
+import { up } from "inquirer/lib/utils/readline";
 
 /**
  * @export
@@ -90,6 +91,39 @@ const UserService: IUserService = {
       });
 
       return user;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+  /**
+   * @param {string} chatid
+   * @param {string} userid
+   * @returns {Promise < IUserModel >}
+   * @memberof UserService
+   */
+  async addChat(chatid: string, userid: string): Promise<IUserModel> {
+    try {
+      const validate: Joi.ValidationResult<{
+        chatid: string;
+        userid: string;
+      }> = UserValidation.addChat({
+        chatid,
+        userid
+      });
+
+      if (validate.error) {
+        throw new Error(validate.error.message);
+      }
+
+      let user: IUserModel = await UserModel.findById(userid);
+
+      //todo: duplicates
+      //add new chat to user's chats
+      user.chats.push(chatid);
+
+      let updatedUser = await UserModel.findByIdAndUpdate(userid, user);
+
+      return updatedUser;
     } catch (error) {
       throw new Error(error.message);
     }

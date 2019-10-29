@@ -17,6 +17,7 @@ export interface IUserModel extends Document {
 
   facebook: string;
   tokens: AuthToken[];
+  chats: string[];
 
   profile: {
     name: string;
@@ -70,6 +71,7 @@ const UserSchema: Schema = new Schema(
       unique: true,
       trim: true
     },
+    chats: Array<String>(),
     password: String,
     passwordResetToken: String,
     passwordResetExpires: Date,

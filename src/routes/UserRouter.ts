@@ -130,6 +130,9 @@ router.get("/:id", UserComponent.findOne);
  */
 router.delete("/:id", UserComponent.remove);
 
+router.post("/addChat", UserComponent.addChat)
+
+
 /**
  * @export {express.Router}
  */

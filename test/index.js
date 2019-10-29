@@ -1,2 +1,3 @@
-require('./authentication');
-require('./api');
+require("./authentication");
+require("./user");
+require("./chat");

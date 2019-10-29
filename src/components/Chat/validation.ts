@@ -17,7 +17,7 @@ class ChatValidation extends Validation {
     super();
   }
 
- /**
+  /**
    * @param {{ id: string }} body
    * @returns {Joi.ValidationResult<{ id: string }>}
    * @memberof ChatValidation
@@ -28,23 +28,10 @@ class ChatValidation extends Validation {
     id: string;
   }> {
     const schema: Joi.Schema = Joi.object().keys({
-      id: this.customJoi.objectId().required()
-    });
-
-    return Joi.validate(body, schema);
-  }
-
-  /**
-   * @param {IUserModel} params
-   * @returns {Joi.ValidationResult<IChatModel >}
-   * @memberof ChatValidation
-   */
-  findAll(params: IUserModel): Joi.ValidationResult<IUserModel> {
-    const schema: Joi.Schema = Joi.object().keys({
       id: Joi.string().required()
     });
 
-    return Joi.validate(params, schema);
+    return Joi.validate(body, schema);
   }
 
   /**
@@ -71,7 +58,7 @@ class ChatValidation extends Validation {
     id: string;
   }> {
     const schema: Joi.Schema = Joi.object().keys({
-      id: this.customJoi.objectId().required()
+      id: Joi.string().required()
     });
 
     return Joi.validate(body, schema);

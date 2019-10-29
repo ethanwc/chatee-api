@@ -67,6 +67,26 @@ class UserValidation extends Validation {
 
     return Joi.validate(body, schema);
   }
+
+  /**
+   * @param {{ id: string }} body
+   * @returns {Joi.ValidationResult<{ id: string }>}
+   * @memberof UserValidation
+   */
+  addChat(body: {
+    userid: string;
+    chatid: string;
+  }): Joi.ValidationResult<{
+    chatid: string;
+    userid: string;
+  }> {
+    const schema: Joi.Schema = Joi.object().keys({
+      chatid: this.customJoi.objectId().required(),
+      userid: this.customJoi.objectId().required()
+    });
+
+    return Joi.validate(body, schema);
+  }
 }
 
 export default new UserValidation();

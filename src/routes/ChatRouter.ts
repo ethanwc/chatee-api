@@ -7,34 +7,6 @@ import { ChatComponent } from "../components";
 const router: Router = Router();
 
 /**
- * GET method route
- * @example http://localhost:PORT/v1/chat
- *
- * @swagger
- * /v1/chat:
- *   get:
- *     description: Get all chats that a user is in
- *     tags: ["chat"]
- *     security:
- *      - ApiKeyAuth: []
- *     responses:
- *       200:
- *         description: An array of chats
- *         content:
- *           application/json:
- *             schema:
- *               oneOf:
- *                - $ref: '#/components/schemas/chat'
- *       default:
- *          description: unexpected error
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schemas/Error'
- */
-router.get("/", ChatComponent.findAll);
-
-/**
  * POST method route
  * @example http://localhost:PORT/v1/chat
  *

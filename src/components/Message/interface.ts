@@ -17,12 +17,12 @@ export interface IMessageService {
    * @returns {Promise<IMessageModel>}
    * @memberof IMessageService
    */
-  // edit(IMessageModel: IMessageModel): Promise<IMessageModel>;
+  edit(IMessageModel: IMessageModel): Promise<IMessageModel>;
 
   /**
-   * @param {IMessageModel} IMessageModel
+   * @param {string} id
    * @returns {Promise<IMessageModel>}
    * @memberof IMessageService
    */
-  // remove(IMessageModel: IMessageModel): Promise<IMessageModel>;
+  remove(id: string): Promise<IMessageModel>;
 }

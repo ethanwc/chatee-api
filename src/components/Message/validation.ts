@@ -17,8 +17,8 @@ class MessageValidation extends Validation {
   }
 
   /**
-   * @param {IUserModel} params
-   * @returns {Joi.ValidationResult<IUserModel >}
+   * @param {IMessageModel} params
+   * @returns {Joi.ValidationResult<IMessageModel >}
    * @memberof MessageValidation
    */
   createMessage(params: IMessageModel): Joi.ValidationResult<IMessageModel> {
@@ -29,6 +29,39 @@ class MessageValidation extends Validation {
     });
 
     return Joi.validate(params, schema);
+  }
+
+  /**
+   * @param {IMessageModel} params
+   * @returns {Joi.ValidationResult<IMessageModel >}
+   * @memberof MessageValidation
+   */
+  editMessage(params: IMessageModel): Joi.ValidationResult<IMessageModel> {
+    const schema: Joi.Schema = Joi.object().keys({
+      chatid: Joi.string().required(),
+      type: Joi.string().required(),
+      message: Joi.string().required(),
+      author: Joi.string().required()
+    });
+
+    return Joi.validate(params, schema);
+  }
+
+  /**
+   * @param {{ id: string }} body
+   * @returns {Joi.ValidationResult<{ id: string }>}
+   * @memberof MessageValidation
+   */
+  removeMessage(body: {
+    id: string;
+  }): Joi.ValidationResult<{
+    id: string;
+  }> {
+    const schema: Joi.Schema = Joi.object().keys({
+      id: Joi.string().required()
+    });
+
+    return Joi.validate(body, schema);
   }
 }
 

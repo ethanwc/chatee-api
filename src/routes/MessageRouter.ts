@@ -80,7 +80,7 @@ router.post("/", MessageComponent.create);
  *
  *
  */
-// router.patch("/", MessageComponent.edit);
+router.patch("/", MessageComponent.edit);
 
 /**
  * DELETE method route
@@ -115,4 +115,4 @@ router.post("/", MessageComponent.create);
  *              schema:
  *                $ref: '#/components/schemas/Error'
  */
-// router.delete("/", MessageComponent.remove);
+router.delete("/", MessageComponent.remove);

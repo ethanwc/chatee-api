@@ -11,7 +11,7 @@ export interface IChatModel extends Document {
   members: Array<string>;
   membersTyping: Array<string>;
   createdDate: Date;
-  messages: Array<IMessageModel>;
+  messages: Array<string>;
   lastMessage: string;
   lastMessageDate: Date;
 }

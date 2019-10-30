@@ -11,4 +11,18 @@ export interface IMessageService {
    * @memberof IMessageService
    */
   insert(IMessageModel: IMessageModel): Promise<IMessageModel>;
+
+  /**
+   * @param {IMessageModel} IMessageModel
+   * @returns {Promise<IMessageModel>}
+   * @memberof IMessageService
+   */
+  // edit(IMessageModel: IMessageModel): Promise<IMessageModel>;
+
+  /**
+   * @param {IMessageModel} IMessageModel
+   * @returns {Promise<IMessageModel>}
+   * @memberof IMessageService
+   */
+  // remove(IMessageModel: IMessageModel): Promise<IMessageModel>;
 }

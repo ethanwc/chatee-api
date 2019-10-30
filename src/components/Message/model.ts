@@ -32,7 +32,6 @@ export interface IMessageModel extends Document {
  *        editDate:
  *          type: string
  *          format: date
- *          type: Array<string>
  *    Chats:
  *      type: array
  *      items:

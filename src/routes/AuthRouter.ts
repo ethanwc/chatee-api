@@ -19,8 +19,6 @@ const router: Router = Router();
  *      required: true
  *      content:
  *        application/json:
- *          schema:
- *            $ref: '#/components/schemas/UserSchema'
  *          example:
  *            email: test.user@mail.com
  *            password: test_test
@@ -58,8 +56,6 @@ router.post('/signup', AuthComponent.signup);
  *      required: true
  *      content:
  *        application/json:
- *          schema:
- *            $ref: '#/components/schemas/UserSchema'
  *          example:
  *            email: test.user@mail.com
  *            password: test_test

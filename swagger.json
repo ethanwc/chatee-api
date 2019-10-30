@@ -22,9 +22,6 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserSchema"
-              },
               "example": {
                 "email": "test.user@mail.com",
                 "password": "test_test"
@@ -71,9 +68,6 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserSchema"
-              },
               "example": {
                 "email": "test.user@mail.com",
                 "password": "test_test"
@@ -330,9 +324,9 @@
             "content": {
               "application/json": {
                 "example": {
-                  "status": 201,
+                  "status": 20,
                   "logged": true,
-                  "message": "Sign in successfull!!"
+                  "message": "Message edited!"
                 }
               }
             }

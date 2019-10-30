@@ -60,7 +60,7 @@ export async function remove(
   try {
     const user: IMessageModel = await MessageService.remove(req.params.id);
 
-    res.status(201).json(user);
+    res.status(200).json(user);
   } catch (error) {
     next(new HttpError(error.message.status, error.message));
   }

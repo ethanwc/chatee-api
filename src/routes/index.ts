@@ -5,6 +5,7 @@ import * as swaggerUi from "swagger-ui-express";
 import AuthRouter from "./AuthRouter";
 import UserRouter from "./UserRouter";
 import ChatRouter from "./ChatRouter";
+import MessageRouter from "./MessageRouter";
 let swaggerDoc: Object;
 
 try {
@@ -44,6 +45,13 @@ export function init(app: express.Application): void {
    * @constructs
    */
   app.use("/v1/chat", ChatRouter);
+
+  /**
+   * @description
+   * Forwards any requests to the /message URI to our MessageRouter
+   * @constructs
+   */
+  app.use("/v1/message", MessageRouter);
 
   /**
    * @description

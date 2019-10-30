@@ -25,6 +25,7 @@ const router: Router = Router();
  *            schema:
  *              $ref: '#/components/schemas/MessageSchema'
  *            example:
+ *              chatid:"12345678"
  *              type: "msg"
  *              message: "test123"
  *              author: "author_id"
@@ -96,7 +97,7 @@ router.patch("/", MessageComponent.edit);
  *   parameters:
  *      - in: path
  *        name: id
- *        description: the unique chatId
+ *        description: the unique messageId
  *        required: true
  *        schema:
  *          type: string
@@ -115,4 +116,9 @@ router.patch("/", MessageComponent.edit);
  *              schema:
  *                $ref: '#/components/schemas/Error'
  */
-router.delete("/", MessageComponent.remove);
+router.delete("/:id", MessageComponent.remove);
+
+/**
+ * @export {express.Router}
+ */
+export default router;

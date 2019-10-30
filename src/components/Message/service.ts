@@ -24,6 +24,7 @@ const MessageService: IMessageService = {
         throw new Error(validate.error.message);
       }
 
+      //todo: create message logic... must add message to user messages
       const message: IMessageModel = await MessageModel.create(body);
 
       return message;
@@ -49,7 +50,7 @@ const MessageService: IMessageService = {
       }
 
       //todo: update not just find
-      const message: IMessageModel = await MessageModel.findById(body);
+      const message: IMessageModel = await MessageModel.findById(body._id);
 
       return message;
     } catch (error) {

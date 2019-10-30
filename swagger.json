@@ -13,365 +13,74 @@
   "paths": {
     "/auth/signup/": {
       "post": {
-        "description": "sign up user to application",
         "tags": [
           "auth"
         ],
-        "requestBody": {
-          "description": "sign up body",
-          "required": true,
-          "content": {
-            "application/json": {
-              "example": {
-                "email": "test.user@mail.com",
-                "password": "test_test"
-              }
+        "summary": "Sign up a user",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User info required to create an account.",
+            "required": true,
+            "example": {
+              "email": "stevejobs@apple.com",
+              "password": "ilovemicrosoft"
             }
           }
-        },
+        ],
         "responses": {
           "201": {
-            "description": "user successfuly signed up",
-            "content": {
-              "appication/json": {
-                "example": {
-                  "status": 201,
-                  "logged": true,
-                  "message": "Sign in successfull!!"
-                }
-              }
-            }
+            "description": "User succesfully registered.",
+            "userid": 1234,
+            "token": "jadw9d0aw8d9a8d0ajdo2kjalkjsd",
+            "logged": true
           },
           "400": {
-            "description": "sign in failed",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": 400,
-                  "logged": false,
-                  "message": "Email already exists"
-                }
-              }
-            }
+            "description": "Sign up failed, email already associated with an account."
           }
         }
       }
     },
     "/auth/login/": {
       "post": {
-        "description": "Login user to application",
         "tags": [
           "auth"
         ],
-        "requestBody": {
-          "description": "login body",
-          "required": true,
-          "content": {
-            "application/json": {
-              "example": {
-                "email": "test.user@mail.com",
-                "password": "test_test"
-              }
+        "summary": "Sign in a user",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User info required to create an account.",
+            "required": true,
+            "example": {
+              "email": "stevejobs@apple.com",
+              "password": "ilovemicrosoft"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
-            "description": "user successfuly logged",
-            "content": {
-              "appication/json": {
-                "example": {
-                  "status": 200,
-                  "logged": true,
-                  "message": "Successfully logged!"
-                }
-              }
-            }
+            "description": "User succesfully signed in.",
+            "userid": 1234,
+            "token": "jadw9d0aw8d9a8d0ajdo2kjalkjsd",
+            "logged": true
           },
-          "401": {
-            "description": "Not logged, invalid credentials",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": 401,
-                  "logged": false,
-                  "message": "Invalid credentials"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/chat": {
-      "post": {
-        "description": "Create new chat",
-        "tags": [
-          "chat"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "requestBody": {
-          "description": "chat creation request body",
-          "required": true,
-          "content": {
-            "application/json": {
-              "example": {
-                "members": [
-                  "test.user@mail"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "return created chat",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": 201
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/chat/{id}": {
-      "get": {
-        "description": "Get chat by chatId",
-        "tags": [
-          "chat"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "the unique chatId",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "return chat by id",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/ChatSchema"
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "description": "Delete chat by chatId",
-        "tags": [
-          "chat"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "the unique chatId",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "return deleted chat",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/ChatSchema"
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/message": {
-      "post": {
-        "description": "Creates a new message, and adds it to the specified chat.",
-        "tags": [
-          "message"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "requestBody": {
-          "description": "message creation request body",
-          "required": true,
-          "content": {
-            "application/json": {
-              "example": {
-                "id": "12345678",
-                "type": "msg",
-                "message": "test123",
-                "author": "12345678"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "returns created message",
-            "content": {
-              "application/json": {
-                "example": null,
-                "_id": "12345678",
-                "type": "msg",
-                "message": "test123",
-                "author": "12345678"
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "description": "Edit an existing message",
-        "tags": [
-          "message"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "requestBody": {
-          "description": "message creation request body",
-          "required": true,
-          "content": {
-            "application/json": {
-              "example": {
-                "id": "12345678",
-                "type": "msg",
-                "message": "test123"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "returns modified message",
-            "content": {
-              "application/json": {
-                "example": null,
-                "_id": "12345678",
-                "type": "msg",
-                "message": "test123",
-                "author": "12345678"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/message/{id}": {
-      "delete": {
-        "description": "Delete a message",
-        "tags": [
-          "message"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ]
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "description": "the unique messageId",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "returns deleted message",
-          "content": {
-            "application/json": {
-              "example": null,
-              "_id": "12345678",
-              "type": "msg",
-              "message": "test123",
-              "author": "12345678"
-            }
-          }
-        }
-      }
-    },
-    "/v1/users/{id}": {
-      "delete": {
-        "description": "Delete user by userId",
-        "tags": [
-          "users"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "the unique userId",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "return deleted user",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/UserSchema"
-                    }
-                  ]
-                }
-              }
-            }
+          "400": {
+            "description": "Invalid email or password."
           }
         }
       }
@@ -405,49 +114,24 @@
       "UserSchema": {
         "required": [
           "email",
-          "name"
+          "password"
         ],
         "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          },
-          "passwordResetToken": {
-            "type": "string"
-          },
-          "passwordResetExpires": {
-            "type": "string",
-            "format": "date"
-          },
-          "tokens": {
-            "type": "array"
-          },
           "chats": {
-            "type": "array"
+            "type": "string[]"
+          },
+          "chatRequests": {
+            "type": "string[]"
           },
           "friends": {
-            "type": "array"
+            "type": "string[]"
           },
-          "network": {
-            "type": "array"
+          "friendRequests": {
+            "type": "string[]"
           },
           "profile": {
-            "type": "object"
+            "type": "JSON"
           }
-        }
-      },
-      "Users": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/UserSchema"
         }
       },
       "Error": {

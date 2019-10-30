@@ -23,7 +23,7 @@ export async function signup(req: Request, res: Response, next: NextFunction): P
             status: 201,
             logged: true,
             token: token,
-            message: 'Sign in successfull'
+            message: 'User succesfully registered.'
         });
     } catch (error) {
         if (error.code === 500) {

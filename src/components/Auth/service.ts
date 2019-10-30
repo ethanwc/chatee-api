@@ -65,7 +65,7 @@ const AuthService: IAuthService = {
                 return user;
             }
 
-            throw new Error('Invalid password or email');
+            throw new Error('Invalid email or password.');
             
         } catch (error) {
             throw new Error(error);

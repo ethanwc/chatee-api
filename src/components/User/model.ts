@@ -12,19 +12,18 @@ import { NextFunction } from "express";
 export interface IUserModel extends Document {
   email: string;
   password: string;
+  chats: string[];
+  chatRequests: string[];
+  friends: string[];
+  friendRequests: string[];
   passwordResetToken: string;
   passwordResetExpires: Date;
   google: string;
   tokens: AuthToken[];
-  friends: string[];
-  friendRequests: string[];  
-  chats: string[];
-  chatRequests: string[];
-  network: IUserModel[]
+  network: IUserModel[];
 
   profile: {
     name: string;
-    gender: string;
     location: string;
     about: string;
     picture: string;
@@ -37,7 +36,6 @@ export type AuthToken = {
   accessToken: string;
   kind: string;
 };
-
 /**
  * @swagger
  * components:
@@ -45,36 +43,20 @@ export type AuthToken = {
  *    UserSchema:
  *      required:
  *        - email
- *        - name
+ *        - password
  *      properties:
- *        id:
- *          type: string
- *        name:
- *          type: string
- *        email:
- *          type: string
- *        password:
- *          type: string
- *        passwordResetToken:
- *          type: string
- *        passwordResetExpires:
- *          type: string
- *          format: date
- *        tokens:
- *          type: array
  *        chats:
- *          type: array
+ *          type: string[]
+ *        chatRequests:
+ *          type: string[]
  *        friends:
- *          type: array
- *        network:
- *          type: array
+ *          type: string[]
+ *        friendRequests:
+ *          type: string[]
  *        profile:
- *          type: object
- *    Users:
- *      type: array
- *      items:
- *        $ref: '#/components/schemas/UserSchema'
+ *          type: JSON
  */
+
 const UserSchema: Schema = new Schema(
   {
     email: {
@@ -82,16 +64,22 @@ const UserSchema: Schema = new Schema(
       unique: true,
       trim: true
     },
-    chats: Array<String>(),
-    chatRequests: Array<JSON>(),
-    friends: Array<String>(),
-    friendRequests: Array<String>(),
-    network: Array<IUserModel>(),
     password: String,
-    google: String,
+    chats: Array(),
+    chatRequests: Array(),
+    friends: Array(),
+    friendRequests: Array(),
     passwordResetToken: String,
     passwordResetExpires: Date,
-    tokens: Array
+    google: String,
+    tokens: Array,
+
+    profile: {
+      name: String,
+      location: String,
+      about: String,
+      picture: String,
+    }
   },
   {
     collection: "usermodel",

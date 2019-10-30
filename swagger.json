@@ -221,7 +221,7 @@
     },
     "/v1/message": {
       "post": {
-        "description": "Create new message",
+        "description": "Creates a new message, and adds it to the specified chat.",
         "tags": [
           "message"
         ],
@@ -235,14 +235,11 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MessageSchema"
-              },
               "example": {
-                "chatid": "12345678",
+                "id": "12345678",
                 "type": "msg",
                 "message": "test123",
-                "author": "author_id"
+                "author": "12345678"
               }
             }
           }
@@ -252,30 +249,18 @@
             "description": "returns created message",
             "content": {
               "application/json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/MessageSchema"
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
+                "example": null,
+                "_id": "12345678",
+                "type": "msg",
+                "message": "test123",
+                "author": "12345678"
               }
             }
           }
         }
       },
       "patch": {
-        "description": "Edit existing message",
+        "description": "Edit an existing message",
         "tags": [
           "message"
         ],
@@ -289,14 +274,10 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MessageSchema"
-              },
               "example": {
-                "messageid": "12345678",
+                "id": "12345678",
                 "type": "msg",
-                "message": "test123",
-                "author": "author_id"
+                "message": "test123"
               }
             }
           }
@@ -306,11 +287,11 @@
             "description": "returns modified message",
             "content": {
               "application/json": {
-                "example": {
-                  "status": 20,
-                  "logged": true,
-                  "message": "Message edited!"
-                }
+                "example": null,
+                "_id": "12345678",
+                "type": "msg",
+                "message": "test123",
+                "author": "12345678"
               }
             }
           }
@@ -345,23 +326,11 @@
           "description": "returns deleted message",
           "content": {
             "application/json": {
-              "schema": {
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/MessageSchema"
-                  }
-                ]
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
+              "example": null,
+              "_id": "12345678",
+              "type": "msg",
+              "message": "test123",
+              "author": "12345678"
             }
           }
         }

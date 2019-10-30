@@ -36,26 +36,6 @@ export type AuthToken = {
   accessToken: string;
   kind: string;
 };
-/**
- * @swagger
- * components:
- *  schemas:
- *    UserSchema:
- *      required:
- *        - email
- *        - password
- *      properties:
- *        chats:
- *          type: string[]
- *        chatRequests:
- *          type: string[]
- *        friends:
- *          type: string[]
- *        friendRequests:
- *          type: string[]
- *        profile:
- *          type: JSON
- */
 
 const UserSchema: Schema = new Schema(
   {

@@ -41,4 +41,11 @@ export interface IUserService {
    * @memberof IUserService
    */
   removeChat(chatid: string, userid: string): Promise<IUserModel>;
+
+  /**
+   * add Friend
+   * remove Friend
+   * 
+   * set ProfileInfo
+   */
 }

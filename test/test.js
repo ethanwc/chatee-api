@@ -12,6 +12,7 @@ chai.should();
  * storing globals to access them in API requests
  */
 global.token = "";
+let userId = undefined;
 /**
  * Authentication tests
  */
@@ -86,9 +87,9 @@ describe("User", () => {
 
   let newChatid = undefined;
 
-  it("create a new chat with user", done => {
+  it("create a new chat", done => {
     const fakeChat = {
-      members: [userId]
+      userid: userId
     };
     request(app)
       .post("/v1/chat")
@@ -121,7 +122,7 @@ describe("User", () => {
   let messageId = undefined;
   it("create message", done => {
     const messageData = {
-      chatid: newChatid,
+      id: newChatid,
       type: "text",
       message: "test1234",
       author: userId
@@ -139,7 +140,7 @@ describe("User", () => {
 
   it("edit message", done => {
     const messageData = {
-      messageid: messageId,
+      id: messageId,
       type: "text",
       message: "test12345678",
       author: userId

@@ -40,7 +40,6 @@ class MessageValidation extends Validation {
   editMessage(params: IMessageModel): Joi.ValidationResult<IMessageModel> {
     const schema: Joi.Schema = Joi.object().keys({
       id: Joi.string().required(),
-      type: Joi.string().required(),
       message: Joi.string().required()
     });
 

@@ -28,10 +28,13 @@ const router: Router = Router();
  *        password: ilovemicrosoft
  *    responses:
  *      201:
- *        description: User succesfully registered.
- *        userid: 1234
- *        token: jadw9d0aw8d9a8d0ajdo2kjalkjsd
- *        logged: true
+ *        description: User successfully registered.
+ *        content:
+ *          application/json:
+ *            example:  
+ *              userid: 1234
+ *              token: jadw9d0aw8d9a8d0ajdo2kjalkjsd
+ *              logged: true
  *      400:
  *        description: Sign up failed, email already associated with an account.
  */
@@ -59,10 +62,13 @@ router.post("/signup", AuthComponent.signup);
  *        password: ilovemicrosoft
  *    responses:
  *      200:
- *        description: User succesfully signed in.
- *        userid: 1234
- *        token: jadw9d0aw8d9a8d0ajdo2kjalkjsd
- *        logged: true
+ *        description: User successfully signed in.
+ *        content:
+ *          application/json:
+ *            example:
+ *              userid: 1234
+ *              token: jadw9d0aw8d9a8d0ajdo2kjalkjsd
+ *              logged: true
  *      400:
  *        description: Invalid email or password.
  */

@@ -16,28 +16,8 @@ export interface IMessageModel extends Document {
 //   reactions: [];
 }
 
-/**
- * @swagger
- * components:
- *  schemas:
- *    ChatSchema:
- *      required:
- *        - type
- *        - createdDate
- *        - author
- *        - message
- *      properties:
- *        reactions:
- *          type: Array<JSON>
- *        editDate:
- *          type: string
- *          format: date
- *    Chats:
- *      type: array
- *      items:
- *        $ref: '#/components/schemas/ChatSchema'
- */
-const ChatSchema: Schema = new Schema(
+ 
+const MessageModel: Schema = new Schema(
   {
     type: String,
     author: String,
@@ -52,4 +32,4 @@ const ChatSchema: Schema = new Schema(
   }
 );
 
-export default connections.db.model<IMessageModel>("MessageModel", ChatSchema);
+export default connections.db.model<IMessageModel>("MessageModel", MessageModel);

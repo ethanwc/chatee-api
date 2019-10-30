@@ -8,42 +8,17 @@ import { IMessageModel } from "../Message/model";
  * @extends {Document}
  */
 export interface IChatModel extends Document {
+  messages: Array<string>;
   members: Array<string>;
   membersTyping: Array<string>;
   createdDate: Date;
-  messages: Array<string>;
   lastMessage: string;
   lastMessageDate: Date;
 }
 
-/**
- * @swagger
- * components:
- *  schemas:
- *    ChatSchema:
- *      required:
- *        - members
- *        - createdDate
- *      properties:
- *        members:
- *          type: Array<string>
- *        createdDate:
- *          type: string
- *          format: date
- *        membersTyping:
- *          type: Array<string>
- *        lastMessage:
- *          type: string
- *        lastMessageDate:
- *          type: string
- *          format: date
- *    Chats:
- *      type: array
- *      items:
- *        $ref: '#/components/schemas/ChatSchema'
- */
 const ChatSchema: Schema = new Schema(
   {
+    messages: Array<String>(),
     members: Array<String>(),
     membersTyping: Array<String>(),
     createdDate: Date,

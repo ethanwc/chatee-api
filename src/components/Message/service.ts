@@ -58,10 +58,16 @@ const MessageService: IMessageService = {
         throw new Error(validate.error.message);
       }
 
-      //todo: update not just find
-      const message: IMessageModel = await MessageModel.findById(body._id);
+      await MessageModel.findOneAndUpdate(
+        { _id: body.id },
+        {
+          $set: {
+            message: body.message
+          }
+        }
+      );
 
-      return message;
+      return await MessageModel.findById(body.id);
     } catch (error) {
       throw new Error(error.message);
     }

@@ -119,13 +119,9 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ChatSchema"
-              },
               "example": {
                 "members": [
-                  "test.user@mail.com",
-                  "stevejobs@apple.com"
+                  "test.user@mail"
                 ]
               }
             }
@@ -136,22 +132,8 @@
             "description": "return created chat",
             "content": {
               "application/json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/ChatSchema"
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
+                "example": {
+                  "status": 201
                 }
               }
             }
@@ -257,6 +239,7 @@
                 "$ref": "#/components/schemas/MessageSchema"
               },
               "example": {
+                "chatid": "12345678",
                 "type": "msg",
                 "message": "test123",
                 "author": "author_id"
@@ -350,7 +333,7 @@
         {
           "in": "path",
           "name": "id",
-          "description": "the unique chatId",
+          "description": "the unique messageId",
           "required": true,
           "schema": {
             "type": "string"

@@ -22,24 +22,15 @@ const router: Router = Router();
  *        required: true
  *        content:
  *          application/json:
- *            schema:
- *              $ref: '#/components/schemas/ChatSchema'
  *            example:
- *              members: ["test.user@mail.com", "stevejobs@apple.com"]
+ *              members: ["test.user@mail"]
  *      responses:
  *        201:
  *          description: return created chat
  *          content:
  *            application/json:
- *              schema:
- *                oneOf:
- *                  - $ref: '#/components/schemas/ChatSchema'
- *        default:
- *          description: unexpected error
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schemas/Error'
+ *              example:
+ *                  status: 201
  */
 router.post("/", ChatComponent.insert);
 

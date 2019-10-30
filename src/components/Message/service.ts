@@ -2,6 +2,8 @@ import * as Joi from "joi";
 import MessageModel, { IMessageModel } from "./model";
 import MessageValidation from "./validation";
 import { IMessageService } from "./interface";
+import UserModel, { IUserModel } from "../User/model";
+import { UserComponent } from "..";
 /**
  * @export
  * @implements {IMessageModelService}
@@ -24,10 +26,13 @@ const MessageService: IMessageService = {
         throw new Error(validate.error.message);
       }
 
-      //todo: create message logic... must add message to user messages
-      const message: IMessageModel = await MessageModel.create(body);
+      //check if user is in a chat before adding a message to it
+      const author: IUserModel = await UserModel.findById(body.author);
 
-      return message;
+      // if (author.chats.includes(body._id))
+        return await MessageModel.create(body);
+
+      
     } catch (error) {
       throw new Error(error.message);
     }

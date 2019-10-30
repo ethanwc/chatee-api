@@ -25,7 +25,7 @@ const router: Router = Router();
  *            schema:
  *              $ref: '#/components/schemas/MessageSchema'
  *            example:
- *              chatid:"12345678"
+ *              chatid: "12345678"
  *              type: "msg"
  *              message: "test123"
  *              author: "author_id"

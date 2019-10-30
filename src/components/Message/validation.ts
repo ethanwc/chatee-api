@@ -23,7 +23,7 @@ class MessageValidation extends Validation {
    */
   createMessage(params: IMessageModel): Joi.ValidationResult<IMessageModel> {
     const schema: Joi.Schema = Joi.object().keys({
-      chatid: Joi.string().required(),
+      id: Joi.string().required(),
       type: Joi.string().required(),
       message: Joi.string().required(),
       author: Joi.string().required()

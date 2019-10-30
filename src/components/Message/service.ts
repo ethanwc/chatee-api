@@ -27,12 +27,16 @@ const MessageService: IMessageService = {
       }
 
       //check if user is in a chat before adding a message to it
-      const author: IUserModel = await UserModel.findById(body.author);
+      const authorCandidate: IUserModel = await UserModel.findById(body.author);
 
-      // if (author.chats.includes(body._id))
+      console.log("checking", body, authorCandidate.chats);
+
+      if (authorCandidate.chats.includes(body.id))
         return await MessageModel.create(body);
-
-      
+      else
+        throw new Error(
+          "User is not a member of the chat, cannot add a message to it."
+        );
     } catch (error) {
       throw new Error(error.message);
     }

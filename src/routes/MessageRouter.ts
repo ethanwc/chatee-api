@@ -5,6 +5,7 @@ import { MessageComponent } from "../components";
  * @constant {express.Router}
  */
 const router: Router = Router();
+
 /**
  * POST method route
  * @example http://localhost:PORT/api/message
@@ -76,6 +77,7 @@ router.post("/", MessageComponent.create);
  *        description: Message creation failed.
  */
 router.patch("/", MessageComponent.edit);
+
 /**
  * DELETE method route
  * @example http://localhost:PORT/api/message

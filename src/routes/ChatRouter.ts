@@ -23,6 +23,8 @@ const router: Router = Router();
  *    - in: "body"
  *      name: "body"
  *      required: true
+ *      example:
+ *        id: 1234809412
  *    responses:
  *      201:
  *        description: Chat successfully created.
@@ -30,7 +32,7 @@ const router: Router = Router();
  *          application/json:
  *            example:
  *              messages: []
- *              members: []
+ *              members: ["1234809412"]
  *              membersTyping: []
  *              _id: 1329038120938
  *      400:

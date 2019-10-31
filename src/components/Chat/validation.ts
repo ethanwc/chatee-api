@@ -41,7 +41,7 @@ class ChatValidation extends Validation {
    */
   insert(params: IChatModel): Joi.ValidationResult<IChatModel> {
     const schema: Joi.Schema = Joi.object().keys({
-      userid: Joi.string().required()
+      id: Joi.string().required()
      });
 
     return Joi.validate(params, schema);

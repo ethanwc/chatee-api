@@ -113,7 +113,10 @@
           {
             "in": "body",
             "name": "body",
-            "required": true
+            "required": true,
+            "example": {
+              "userid": 1234809412
+            }
           }
         ],
         "responses": {
@@ -123,7 +126,9 @@
               "application/json": {
                 "example": {
                   "messages": [],
-                  "members": [],
+                  "members": [
+                    "1234809412"
+                  ],
                   "membersTyping": [],
                   "_id": 1329038120938
                 }

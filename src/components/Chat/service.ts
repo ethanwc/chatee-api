@@ -45,9 +45,13 @@ const ChatService: IChatService = {
         throw new Error(validate.error.message);
       }
 
-      const chat: IChatModel = await ChatModel.create(body);
 
-      return chat;
+      const chat: IChatModel = new ChatModel({
+        members: [body.id]
+    });
+      const establishedChat: IChatModel = await ChatModel.create(chat);
+
+      return establishedChat;
     } catch (error) {
       throw new Error(error.message);
     }

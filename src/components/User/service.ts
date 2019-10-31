@@ -315,7 +315,7 @@ const UserService: IUserService = {
     try {
       const validate: Joi.ValidationResult<
         IUserModel
-      > = UserValidation.createUser(user);
+      > = UserValidation.profile(user);
 
       if (validate.error) {
         throw new Error(validate.error.message);

@@ -134,7 +134,8 @@ class UserValidation extends Validation {
    */
   profile(params: IUserModel): Joi.ValidationResult<IUserModel> {
     const schema: Joi.Schema = Joi.object().keys({
-      id: Joi.string().required()
+      id: Joi.string().required(),
+      profile: Joi.object()
     });
 
     return Joi.validate(params, schema);

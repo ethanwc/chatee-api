@@ -284,7 +284,7 @@ router.post("/addFriend", UserComponent.addFriend);
  *      400:
  *        description: Modifying profile failed.
  */
-// router.post("/profile", UserComponent.editProfile);
+router.post("/profile", UserComponent.editProfile);
 
 /**
  * @export {express.Router}

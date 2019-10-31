@@ -195,6 +195,113 @@ const UserService: IUserService = {
     } catch (error) {
       throw new Error(error.message);
     }
+  },
+
+  /**
+   * Add user id to the other's friend requests list.
+   * @param {string} id
+   * @param {string} friendid
+   * @returns {Promise < IUserModel >}
+   * @memberof UserService
+   */
+  async addFriend(id: string, friendid: string): Promise<IUserModel> {
+    try {
+      const validate: Joi.ValidationResult<{
+        id: string;
+        friendid: string;
+      }> = UserValidation.friend({
+        id,
+        friendid
+      });
+
+      if (validate.error) {
+        throw new Error(validate.error.message);
+      }
+
+      await UserModel.update(
+        { _id: friendid },
+        { $push: { friendRequests: id } }
+      );
+
+      let updatedUser = await UserModel.findById(id);
+
+      return updatedUser;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  /**
+   * @param {string} id
+   * @param {string} friendid
+   * @returns {Promise < IUserModel >}
+   * @memberof UserService
+   */
+  async acceptFriend(id: string, friendid: string): Promise<IUserModel> {
+    try {
+      const validate: Joi.ValidationResult<{
+        id: string;
+        friendid: string;
+      }> = UserValidation.friend({
+        id,
+        friendid
+      });
+
+      if (validate.error) {
+        throw new Error(validate.error.message);
+      }
+
+      //add friend to your friends
+      await UserModel.update({ _id: id }, { $push: { friends: friendid } });
+
+      //add yourself to friend, and remove yourself from his requests
+      await UserModel.update(
+        { _id: friendid },
+        { $push: { friends: id } },
+        { $pull: { friendRequests: id } }
+      );
+
+      let updatedUser = await UserModel.findById(id);
+
+      return updatedUser;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  /**
+   * Remove from both users.
+   * @param {string} id
+   * @param {string} friendid
+   * @returns {Promise < IUserModel >}
+   * @memberof UserService
+   */
+  async removeFriend(id: string, friendid: string): Promise<IUserModel> {
+    try {
+      const validate: Joi.ValidationResult<{
+        id: string;
+        friendid: string;
+      }> = UserValidation.friend({
+        id,
+        friendid
+      });
+
+      if (validate.error) {
+        throw new Error(validate.error.message);
+      }
+
+      //remove yourself from friends friends
+      await UserModel.update({ _id: friendid }, { $pull: { friends: id } });
+
+      //remove friend from your friends
+      await UserModel.update({ _id: id }, { $pull: { friends: friendid } });
+
+      let updatedUser = await UserModel.findById(id);
+
+      return updatedUser;
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 };
 

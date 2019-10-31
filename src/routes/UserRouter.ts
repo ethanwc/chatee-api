@@ -212,7 +212,7 @@ router.post("/removeChat", UserComponent.removeChat);
  *        description: Friend request failed.
  */
 
-// router.post("/addFriend", UserComponent.addFriend);
+router.post("/addFriend", UserComponent.addFriend);
 
  /**
  * POST method route

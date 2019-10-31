@@ -113,3 +113,29 @@ export async function removeChat(
     next(new HttpError(error.message.status, error.message));
   }
 }
+
+
+
+/**
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ * @returns {Promise < void >}
+ */
+export async function addFriend(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const user: IUserModel = await UserService.addFriend(
+      req.body.id,
+      req.body.friendid
+    );
+
+    res.status(200).json(user);
+  } catch (error) {
+    next(new HttpError(error.message.status, error.message));
+  }
+}

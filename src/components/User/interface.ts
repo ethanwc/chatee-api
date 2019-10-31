@@ -43,9 +43,33 @@ export interface IUserService {
   removeChat(chatid: string, userid: string): Promise<IUserModel>;
 
   /**
-   * add Friend
-   * remove Friend
-   * 
-   * set ProfileInfo
+   * @param {string} id
+   * @param {string} friendid
+   * @returns {Promise<IUserModel>}
+   * @memberof IUserService
    */
+  addFriend(id: string, friendid: string): Promise<IUserModel>;
+
+  /**
+   * @param {string} id
+   * @param {string} friendid
+   * @returns {Promise<IUserModel>}
+   * @memberof IUserService
+   */
+  acceptFriend(id: string, friendid: string): Promise<IUserModel>;
+
+  /**
+   * @param {string} id
+   * @param {string} friendid
+   * @returns {Promise<IUserModel>}
+   * @memberof IUserService
+   */
+  removeFriend(id: string, friendid: string): Promise<IUserModel>;
+
+  // /**
+  //  * @param {IUserModel} UserModel
+  //  * @returns {Promise<IUserModel>}
+  //  * @memberof IUserService
+  //  */
+  // setProfile(IUserModel: IUserModel): Promise<IUserModel>;
 }

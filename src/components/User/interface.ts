@@ -66,10 +66,10 @@ export interface IUserService {
    */
   removeFriend(id: string, friendid: string): Promise<IUserModel>;
 
-  // /**
-  //  * @param {IUserModel} UserModel
-  //  * @returns {Promise<IUserModel>}
-  //  * @memberof IUserService
-  //  */
-  // setProfile(IUserModel: IUserModel): Promise<IUserModel>;
+  /**
+   * @param {IUserModel} UserModel
+   * @returns {Promise<IUserModel>}
+   * @memberof IUserService
+   */
+  setProfile(IUserModel: IUserModel): Promise<IUserModel>;
 }

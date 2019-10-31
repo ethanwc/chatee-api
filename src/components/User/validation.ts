@@ -127,6 +127,18 @@ class UserValidation extends Validation {
 
     return Joi.validate(body, schema);
   }
+  /**
+   * @param {IUserModel} params
+   * @returns {Joi.ValidationResult<IUserModel >}
+   * @memberof UserValidation
+   */
+  profile(params: IUserModel): Joi.ValidationResult<IUserModel> {
+    const schema: Joi.Schema = Joi.object().keys({
+      id: Joi.string().required()
+    });
+
+    return Joi.validate(params, schema);
+  }
 }
 
 export default new UserValidation();

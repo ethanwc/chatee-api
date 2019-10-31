@@ -261,7 +261,7 @@ router.post("/addFriend", UserComponent.addFriend);
  *      description: "Update user profile info."
  *      required: true
  *      example:
- *        userid: 5dba164e8f73153ba8930430 *
+ *        id: 5dba164e8f73153ba8930430 *
  *        profile:
  *          name: steve jobless
  *          location: Seattle, WA

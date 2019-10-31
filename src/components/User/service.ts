@@ -5,6 +5,7 @@ import UserValidation from "./validation";
 import { IUserService } from "./interface";
 import { Types } from "mongoose";
 import { ObjectId } from "mongodb";
+import bodyParser = require("body-parser");
 
 /**
  * @export
@@ -297,6 +298,36 @@ const UserService: IUserService = {
       await UserModel.update({ _id: id }, { $pull: { friends: friendid } });
 
       let updatedUser = await UserModel.findById(id);
+
+      return updatedUser;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  /**
+   * Update user profile information.
+   * @param {IUserModel} user
+   * @returns {Promise < IUserModel >}
+   * @memberof UserService
+   */
+  async setProfile(user: IUserModel): Promise<IUserModel> {
+    try {
+      const validate: Joi.ValidationResult<
+        IUserModel
+      > = UserValidation.createUser(user);
+
+      if (validate.error) {
+        throw new Error(validate.error.message);
+      }
+
+      //update user profile info
+      await UserModel.update(
+        { _id: user.id },
+        { $set: { profile: user.profile } }
+      );
+
+      let updatedUser = await UserModel.findById(user.id);
 
       return updatedUser;
     } catch (error) {

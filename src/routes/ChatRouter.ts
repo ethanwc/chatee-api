@@ -99,11 +99,11 @@ router.delete("/:id", ChatComponent.removeChat);
 
 /**
  * POST method route
- * @example http://localhost:PORT/api/users/addChat
+ * @example http://localhost:PORT/api/chat/addChat
  * @swagger
- * /users/addChat:
+ * /chat/addChat:
  *  post:
- *    tags: ["user"]
+ *    tags: ["chat"]
  *    summary: "Add user to a chat"
  *    consumes:
  *    - "application/json"
@@ -137,11 +137,11 @@ router.post("/invite", ChatComponent.addChat);
 
 /**
  * POST method route
- * @example http://localhost:PORT/api/users/removeChat
+ * @example http://localhost:PORT/api/chat/removeChat
  * @swagger
- * /users/removeChat:
+ * /chat/removeChat:
  *  post:
- *    tags: ["user"]
+ *    tags: ["chat"]
  *    summary: "Remove user from a chat"
  *    consumes:
  *    - "application/json"

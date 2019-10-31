@@ -49,8 +49,6 @@ export async function insert(
   }
 }
 
-
-
 /**
  * Removes a chat on id.
  * @export
@@ -71,8 +69,8 @@ export async function deleteChat(
   } catch (error) {
     next(new HttpError(error.message.status, error.message));
   }
-
 }
+
 /**
  * @export
  * @param {Request} req
@@ -89,6 +87,31 @@ export async function addChat(
     const user: IUserModel = await ChatService.invite(
       req.body.chatid,
       req.body.userid
+    );
+
+    res.status(200).json(user);
+  } catch (error) {
+    next(new HttpError(error.message.status, error.message));
+  }
+}
+
+/**
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ * @returns {Promise < void >}
+ */
+export async function handleInvite(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const user: IUserModel = await ChatService.handleInvite(
+      req.body.chatid,
+      req.body.userid,
+      req.body.accept
     );
 
     res.status(200).json(user);

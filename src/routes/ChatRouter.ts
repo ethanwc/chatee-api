@@ -119,7 +119,7 @@ router.delete("/:id", ChatComponent.removeChat);
  *        chatid: 5dba16978f73153ba8930431
  *    responses:
  *      200:
- *        description: User successfully added to chat.
+ *        description: User successfully added to new chat.
  *        content:
  *          application/json:
  *            example:
@@ -134,6 +134,46 @@ router.delete("/:id", ChatComponent.removeChat);
  *        description: Adding failed.
  */
 router.post("/invite", ChatComponent.addChat);
+
+/**
+ * POST method route
+ * @example http://localhost:PORT/api/chat/handleInvite
+ * @swagger
+ * /chat/handleInvite:
+ *  post:
+ *    tags: ["chat"]
+ *    summary: "Accept an invite to a chat"
+ *    consumes:
+ *    - "application/json"
+ *    produces:
+ *    - "application/json"
+ *    parameters:
+ *    - in: "body"
+ *      name: "body"
+ *      description: "User accepts a request to a chat."
+ *      required: true
+ *      example:
+ *        userid: 5dba164e8f73153ba8930430
+ *        chatid: 5dba16978f73153ba8930431
+ *        accept: true
+ *        
+ *    responses:
+ *      200:
+ *        description: User successfully added to chat.
+ *        content:
+ *          application/json:
+ *            example:
+ *              _id: userid_1233
+ *              email: stevejobs@apple.com
+ *              chats: ["5dba16978f73153ba8930431"]
+ *              chatRequests: []
+ *              friends: []
+ *              friendRequests: []
+ *              tokens: []
+ *      400:
+ *        description: Adding failed.
+ */
+router.post("handleInvite", ChatComponent.handleInvite);
 
 /**
  * POST method route

@@ -81,6 +81,7 @@ const ChatService: IChatService = {
       throw new Error(error.message);
     }
   },
+
   /**
    * @param {string} chatid
    * @param {string} userid
@@ -105,6 +106,49 @@ const ChatService: IChatService = {
       let updatedUser = await UserModel.findById(userid);
 
       return updatedUser;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  /**
+   * @param {string} chatid
+   * @param {string} userid
+   * @param {boolean} accept
+   * @returns {Promise < IUserModel >}
+   * @memberof ChatService
+   */
+  async handleInvite(
+    chatid: string,
+    userid: string,
+    accept: boolean
+  ): Promise<IUserModel> {
+    try {
+      const validate: Joi.ValidationResult<{
+        chatid: string;
+        userid: string;
+        accept: boolean;
+      }> = ChatValidation.handleInvite({
+        chatid,
+        userid,
+        accept
+      });
+
+      if (validate.error) {
+        throw new Error(validate.error.message);
+      }
+
+      //chatreq -> chat or chatreq -> nothing
+      if (accept)
+        await UserModel.update(
+          { _id: userid },
+          { $push: { chats: chatid } },
+          { $pull: { chatRequests: chatid } }
+        );
+      else
+        await UserModel.update({ _id: userid }, { $push: { chats: chatid } });
+
+      return await UserModel.findById(userid);
     } catch (error) {
       throw new Error(error.message);
     }

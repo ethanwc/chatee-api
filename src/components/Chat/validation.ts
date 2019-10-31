@@ -83,6 +83,29 @@ class ChatValidation extends Validation {
 
     return Joi.validate(body, schema);
   }
+
+   /**
+   * @param {{ chatid: string, userid: string, accept: boolean }} body
+   * @returns {Joi.ValidationResult<IUserModel>}
+   * @memberof UserValidation
+   */
+  handleInvite(body: {
+    userid: string;
+    chatid: string;
+    accept: boolean;
+  }): Joi.ValidationResult<{
+    chatid: string;
+    userid: string;
+    accept: boolean;
+  }> {
+    const schema: Joi.Schema = Joi.object().keys({
+      chatid: this.customJoi.objectId().required(),
+      userid: this.customJoi.objectId().required(),
+      accept: Joi.boolean().required()
+    });
+
+    return Joi.validate(body, schema);
+  }
 }
 
 export default new ChatValidation();

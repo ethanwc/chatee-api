@@ -146,7 +146,7 @@ const ChatService: IChatService = {
           { $pull: { chatRequests: chatid } }
         );
       else
-        await UserModel.update({ _id: userid }, { $push: { chats: chatid } });
+        await UserModel.update({ _id: userid }, { $pull: { chatsRequests: chatid } });
 
       return await UserModel.findById(userid);
     } catch (error) {

@@ -87,6 +87,29 @@ class UserValidation extends Validation {
 
     return Joi.validate(body, schema);
   }
+
+  /**
+   * @param {{ id: string, friendid: string, accept: boolean }} body
+   * @returns {Joi.ValidationResult<IUserModel>}
+   * @memberof UserValidation
+   */
+  handleFriend(body: {
+    id: string;
+    friendid: string;
+    accept: boolean;
+  }): Joi.ValidationResult<{
+    id: string;
+    friendid: string;
+    accept: boolean;
+  }> {
+    const schema: Joi.Schema = Joi.object().keys({
+      id: this.customJoi.objectId().required(),
+      friendid: this.customJoi.objectId().required(),
+      accept: Joi.boolean().required()
+    });
+
+    return Joi.validate(body, schema);
+  }
   /**
    * @param {IUserModel} params
    * @returns {Joi.ValidationResult<IUserModel >}

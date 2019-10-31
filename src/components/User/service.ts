@@ -177,17 +177,20 @@ const UserService: IUserService = {
   /**
    * @param {string} id
    * @param {string} friendid
+   * @param {boolean} accept 
    * @returns {Promise < IUserModel >}
    * @memberof UserService
    */
-  async acceptFriend(id: string, friendid: string): Promise<IUserModel> {
+  async handleFriend(id: string, friendid: string, accept: boolean): Promise<IUserModel> {
     try {
       const validate: Joi.ValidationResult<{
         id: string;
         friendid: string;
-      }> = UserValidation.friend({
+        accept: boolean;
+      }> = UserValidation.handleFriend({
         id,
-        friendid
+        friendid,
+        accept
       });
 
       if (validate.error) {

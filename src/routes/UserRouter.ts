@@ -139,6 +139,48 @@ router.post("/addFriend", UserComponent.addFriend);
 
 /**
  * POST method route
+ * @example http://localhost:PORT/api/users/handleFriend
+ * @swagger
+ * /users/handleFriend:
+ *  post:
+ *    tags: ["user"]
+ *    summary: "Handle friend request"
+ *    consumes:
+ *    - "application/json"
+ *    produces:
+ *    - "application/json"
+ *    parameters:
+ *    - in: "body"
+ *      name: "body"
+ *      description: "Handle users response to friend request."
+ *      required: true
+ *      example:
+ *        id: userid_1234
+ *        friendid: friendid_112345
+ *        accept: true
+ *    responses:
+ *      200:
+ *        description: Handled request.
+ *        content:
+ *          application/json:
+ *            example:
+ *              _id: userid_1233
+ *              email: stevejobs@apple.com
+ *              chats: []
+ *              chatRequests: []
+ *              friends: ["friendid_112345"]
+ *              friendRequests: []
+ *              tokens: []
+ * 
+ *      400:
+ *        description: Handling request failed.
+ */
+
+router.post("/handleFriend", UserComponent.handleFriend);
+
+
+/**
+ * POST method route
  * @example http://localhost:PORT/api/users/removeFriend
  * @swagger
  * /users/removeFriend:
@@ -164,7 +206,7 @@ router.post("/addFriend", UserComponent.addFriend);
  *        description: Friend removal failed.
  */
 
-// router.post("/removeFriend", UserComponent.removeFriend);
+router.post("/removeFriend", UserComponent.removeFriend);
 
 /**
  * POST method route

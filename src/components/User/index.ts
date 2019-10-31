@@ -97,15 +97,16 @@ export async function addFriend(
  * @param {NextFunction} next
  * @returns {Promise < void >}
  */
-export async function acceptFriend(
+export async function handleFriend(
   req: Request,
   res: Response,
   next: NextFunction
 ): Promise<void> {
   try {
-    const user: IUserModel = await UserService.acceptFriend(
+    const user: IUserModel = await UserService.handleFriend(
       req.body.id,
-      req.body.friendid
+      req.body.friendid,
+      req.body.accept
     );
 
     res.status(200).json(user);

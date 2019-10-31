@@ -44,14 +44,14 @@ export function init(app: express.Application): void {
    * Forwards any requests to the /chat URI to our ChatRouter
    * @constructs
    */
-  app.use("/v1/chat", ChatRouter);
+  app.use("/v1/chat", jwtConfig.isAuthenticated, ChatRouter);
 
   /**
    * @description
    * Forwards any requests to the /message URI to our MessageRouter
    * @constructs
    */
-  app.use("/v1/message", MessageRouter);
+  app.use("/v1/message", jwtConfig.isAuthenticated, MessageRouter);
 
   /**
    * @description

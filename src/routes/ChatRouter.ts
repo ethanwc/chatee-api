@@ -142,7 +142,7 @@ router.post("/invite", ChatComponent.addChat);
  * /chat/handleInvite:
  *  post:
  *    tags: ["chat"]
- *    summary: "Accept an invite to a chat"
+ *    summary: "Handle an invite to a chat"
  *    consumes:
  *    - "application/json"
  *    produces:
@@ -150,7 +150,7 @@ router.post("/invite", ChatComponent.addChat);
  *    parameters:
  *    - in: "body"
  *      name: "body"
- *      description: "User accepts a request to a chat."
+ *      description: "Handles an invite to a chat."
  *      required: true
  *      example:
  *        userid: 5dba164e8f73153ba8930430
@@ -159,7 +159,7 @@ router.post("/invite", ChatComponent.addChat);
  *        
  *    responses:
  *      200:
- *        description: User successfully added to chat.
+ *        description: User decision successfully handled.
  *        content:
  *          application/json:
  *            example:
@@ -171,7 +171,7 @@ router.post("/invite", ChatComponent.addChat);
  *              friendRequests: []
  *              tokens: []
  *      400:
- *        description: Adding failed.
+ *        description: Handling failed.
  */
 router.post("handleInvite", ChatComponent.handleInvite);
 

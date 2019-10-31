@@ -37,10 +37,11 @@ export interface IUserService {
   /**
    * @param {string} id
    * @param {string} friendid
+   * @param {boolean} accept
    * @returns {Promise<IUserModel>}
    * @memberof IUserService
    */
-  acceptFriend(id: string, friendid: string): Promise<IUserModel>;
+  handleFriend(id: string, friendid: string, accept: boolean): Promise<IUserModel>;
 
   /**
    * @param {string} id

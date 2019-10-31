@@ -285,7 +285,7 @@
         "tags": [
           "chat"
         ],
-        "summary": "Accept an invite to a chat",
+        "summary": "Handle an invite to a chat",
         "consumes": [
           "application/json"
         ],
@@ -296,7 +296,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "User accepts a request to a chat.",
+            "description": "Handles an invite to a chat.",
             "required": true,
             "example": {
               "userid": "5dba164e8f73153ba8930430",
@@ -307,7 +307,7 @@
         ],
         "responses": {
           "200": {
-            "description": "User successfully added to chat.",
+            "description": "User decision successfully handled.",
             "content": {
               "application/json": {
                 "example": {
@@ -325,7 +325,7 @@
             }
           },
           "400": {
-            "description": "Adding failed."
+            "description": "Handling failed."
           }
         }
       }
@@ -654,6 +654,56 @@
           },
           "400": {
             "description": "Friend request failed."
+          }
+        }
+      }
+    },
+    "/users/handleFriend": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Handle friend request",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Handle users response to friend request.",
+            "required": true,
+            "example": {
+              "id": "userid_1234",
+              "friendid": "friendid_112345",
+              "accept": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Handled request.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "_id": "userid_1233",
+                  "email": "stevejobs@apple.com",
+                  "chats": [],
+                  "chatRequests": [],
+                  "friends": [
+                    "friendid_112345"
+                  ],
+                  "friendRequests": [],
+                  "tokens": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Handling request failed."
           }
         }
       }

@@ -25,5 +25,21 @@ export interface IChatService {
    * @returns {Promise<IChatModel>}
    * @memberof IChatModel
    */
-  remove(id: string): Promise<IChatModel>;
+  delete(id: string): Promise<IChatModel>;
+
+  /**
+   * @param {string} chatid
+   * @param {string} userid    *
+   * @returns {Promise<IUserModel>}
+   * @memberof IUserService
+   */
+  invite(chatid: string, userid: string): Promise<IUserModel>;
+
+  /**
+   * @param {string} chatid
+   * @param {string} userid
+   * @returns {Promise<IUserModel>}
+   * @memberof IUserService
+   */
+  remove(chatid: string, userid: string): Promise<IUserModel>;
 }

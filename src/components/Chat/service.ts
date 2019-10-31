@@ -2,6 +2,7 @@ import * as Joi from "joi";
 import ChatModel, { IChatModel } from "./model";
 import ChatValidation from "./validation";
 import { IChatService } from "./interface";
+import UserModel, { IUserModel } from "../User/model";
 
 /**
  * @export
@@ -45,10 +46,9 @@ const ChatService: IChatService = {
         throw new Error(validate.error.message);
       }
 
-
       const chat: IChatModel = new ChatModel({
         members: [body.id]
-    });
+      });
       const establishedChat: IChatModel = await ChatModel.create(chat);
 
       return establishedChat;
@@ -62,7 +62,7 @@ const ChatService: IChatService = {
    * @returns {Promise < IChatModel >}
    * @memberof ChatService
    */
-  async remove(id: string): Promise<IChatModel> {
+  async delete(id: string): Promise<IChatModel> {
     try {
       const validate: Joi.ValidationResult<{
         id: string;
@@ -77,6 +77,64 @@ const ChatService: IChatService = {
       const chat: IChatModel = await ChatModel.findByIdAndRemove(id);
 
       return chat;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+  /**
+   * @param {string} chatid
+   * @param {string} userid
+   * @returns {Promise < IUserModel >}
+   * @memberof ChatService
+   */
+  async invite(chatid: string, userid: string): Promise<IUserModel> {
+    try {
+      const validate: Joi.ValidationResult<{
+        chatid: string;
+        userid: string;
+      }> = ChatValidation.invite({
+        chatid,
+        userid
+      });
+
+      if (validate.error) {
+        throw new Error(validate.error.message);
+      }
+
+      await UserModel.update({ _id: userid }, { $addToSet: { chats: chatid } });
+      let updatedUser = await UserModel.findById(userid);
+
+      return updatedUser;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  /**
+   * @param {string} chatid
+   * @param {string} userid
+   * @returns {Promise < IUserModel >}
+   * @memberof ChatService
+   */
+  async remove(chatid: string, userid: string): Promise<IUserModel> {
+    try {
+      const validate: Joi.ValidationResult<{
+        chatid: string;
+        userid: string;
+      }> = ChatValidation.invite({
+        chatid,
+        userid
+      });
+
+      if (validate.error) {
+        throw new Error(validate.error.message);
+      }
+
+      await UserModel.update({ _id: userid }, { $pull: { chats: chatid } });
+
+      let updatedUser = await UserModel.findById(userid);
+
+      return updatedUser;
     } catch (error) {
       throw new Error(error.message);
     }

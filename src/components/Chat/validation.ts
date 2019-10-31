@@ -42,7 +42,7 @@ class ChatValidation extends Validation {
   insert(params: IChatModel): Joi.ValidationResult<IChatModel> {
     const schema: Joi.Schema = Joi.object().keys({
       id: Joi.string().required()
-     });
+    });
 
     return Joi.validate(params, schema);
   }
@@ -59,6 +59,26 @@ class ChatValidation extends Validation {
   }> {
     const schema: Joi.Schema = Joi.object().keys({
       id: Joi.string().required()
+    });
+
+    return Joi.validate(body, schema);
+  }
+
+  /**
+   * @param {{ chatid: string, userid: string }} body
+   * @returns {Joi.ValidationResult<IUserModel>}
+   * @memberof UserValidation
+   */
+  invite(body: {
+    userid: string;
+    chatid: string;
+  }): Joi.ValidationResult<{
+    chatid: string;
+    userid: string;
+  }> {
+    const schema: Joi.Schema = Joi.object().keys({
+      chatid: this.customJoi.objectId().required(),
+      userid: this.customJoi.objectId().required()
     });
 
     return Joi.validate(body, schema);

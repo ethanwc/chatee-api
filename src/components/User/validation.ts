@@ -69,46 +69,6 @@ class UserValidation extends Validation {
   }
 
   /**
-   * @param {{ chatid: string, userid: string }} body
-   * @returns {Joi.ValidationResult<IUserModel>}
-   * @memberof UserValidation
-   */
-  addChat(body: {
-    userid: string;
-    chatid: string;
-  }): Joi.ValidationResult<{
-    chatid: string;
-    userid: string;
-  }> {
-    const schema: Joi.Schema = Joi.object().keys({
-      chatid: this.customJoi.objectId().required(),
-      userid: this.customJoi.objectId().required()
-    });
-
-    return Joi.validate(body, schema);
-  }
-
-  /**
-   * @param {{ chatid: string, userid: string }} body
-   * @returns {Joi.ValidationResult<IUserModel>}
-   * @memberof UserValidation
-   */
-  removeChat(body: {
-    userid: string;
-    chatid: string;
-  }): Joi.ValidationResult<{
-    chatid: string;
-    userid: string;
-  }> {
-    const schema: Joi.Schema = Joi.object().keys({
-      chatid: this.customJoi.objectId().required(),
-      userid: this.customJoi.objectId().required()
-    });
-
-    return Joi.validate(body, schema);
-  }
-
-  /**
    * @param {{ id: string, friendid: string }} body
    * @returns {Joi.ValidationResult<IUserModel>}
    * @memberof UserValidation

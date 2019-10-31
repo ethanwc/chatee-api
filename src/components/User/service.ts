@@ -139,64 +139,6 @@ const UserService: IUserService = {
       throw new Error(error.message);
     }
   },
-  /**
-   * @param {string} chatid
-   * @param {string} userid
-   * @returns {Promise < IUserModel >}
-   * @memberof UserService
-   */
-  async addChat(chatid: string, userid: string): Promise<IUserModel> {
-    try {
-      const validate: Joi.ValidationResult<{
-        chatid: string;
-        userid: string;
-      }> = UserValidation.addChat({
-        chatid,
-        userid
-      });
-
-      if (validate.error) {
-        throw new Error(validate.error.message);
-      }
-
-      await UserModel.update({ _id: userid }, { $addToSet: { chats: chatid } });
-      let updatedUser = await UserModel.findById(userid);
-
-      return updatedUser;
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  },
-
-  /**
-   * @param {string} chatid
-   * @param {string} userid
-   * @returns {Promise < IUserModel >}
-   * @memberof UserService
-   */
-  async removeChat(chatid: string, userid: string): Promise<IUserModel> {
-    try {
-      const validate: Joi.ValidationResult<{
-        chatid: string;
-        userid: string;
-      }> = UserValidation.addChat({
-        chatid,
-        userid
-      });
-
-      if (validate.error) {
-        throw new Error(validate.error.message);
-      }
-
-      await UserModel.update({ _id: userid }, { $pull: { chats: chatid } });
-
-      let updatedUser = await UserModel.findById(userid);
-
-      return updatedUser;
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  },
 
   /**
    * Add user id to the other's friend requests list.
@@ -313,9 +255,9 @@ const UserService: IUserService = {
    */
   async setProfile(user: IUserModel): Promise<IUserModel> {
     try {
-      const validate: Joi.ValidationResult<
-        IUserModel
-      > = UserValidation.profile(user);
+      const validate: Joi.ValidationResult<IUserModel> = UserValidation.profile(
+        user
+      );
 
       if (validate.error) {
         throw new Error(validate.error.message);

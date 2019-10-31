@@ -110,83 +110,6 @@ router.delete("/:id", UserComponent.remove);
 
 /**
  * POST method route
- * @example http://localhost:PORT/api/users/addChat
- * @swagger
- * /users/addChat:
- *  post:
- *    tags: ["user"]
- *    summary: "Add user to a chat"
- *    consumes:
- *    - "application/json"
- *    produces:
- *    - "application/json"
- *    parameters:
- *    - in: "body"
- *      name: "body"
- *      description: "User and chat info to add user to chat."
- *      required: true
- *      example:
- *        userid: 5dba164e8f73153ba8930430
- *        chatid: 5dba16978f73153ba8930431
- *    responses:
- *      200:
- *        description: User successfully added to chat.
- *        content:
- *          application/json:
- *            example:
- *              _id: userid_1233
- *              email: stevejobs@apple.com
- *              chats: ["5dba16978f73153ba8930431"]
- *              chatRequests: []
- *              friends: []
- *              friendRequests: []
- *              tokens: []
- *      400:
- *        description: Adding failed.
- */
-router.post("/addChat", UserComponent.addChat);
-
-/**
- * POST method route
- * @example http://localhost:PORT/api/users/removeChat
- * @swagger
- * /users/removeChat:
- *  post:
- *    tags: ["user"]
- *    summary: "Remove user from a chat"
- *    consumes:
- *    - "application/json"
- *    produces:
- *    - "application/json"
- *    parameters:
- *    - in: "body"
- *      name: "body"
- *      description: "User and chat info to remove user from chat."
- *      required: true
- *      example:
- *        userid: 5dba164e8f73153ba8930430
- *        chatid: 5dba16978f73153ba8930431
- *    responses:
- *      200:
- *        description: User successfully removed from chat.
- *        content:
- *          application/json:
- *            example:
- *              _id: userid_1233
- *              email: stevejobs@apple.com
- *              chats: []
- *              chatRequests: []
- *              friends: []
- *              friendRequests: []
- *              tokens: []
- *      400:
- *        description: Removing failed.
- */
-router.post("/removeChat", UserComponent.removeChat);
-
-
-/**
- * POST method route
  * @example http://localhost:PORT/api/users/addFriend
  * @swagger
  * /users/addFriend:
@@ -214,7 +137,7 @@ router.post("/removeChat", UserComponent.removeChat);
 
 router.post("/addFriend", UserComponent.addFriend);
 
- /**
+/**
  * POST method route
  * @example http://localhost:PORT/api/users/removeFriend
  * @swagger

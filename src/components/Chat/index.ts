@@ -19,7 +19,7 @@ export async function findOne(
   next: NextFunction
 ): Promise<void> {
   try {
-    const chat: IChatModel = await ChatService.findOne(req.params.id);
+    const chat: IChatModel = await ChatService.findOne(req.params.id, req.body.user);
 
     res.status(200).json(chat);
   } catch (error) {
@@ -41,7 +41,7 @@ export async function insert(
   next: NextFunction
 ): Promise<void> {
   try {
-    const chat: IChatModel = await ChatService.insert(req.body);
+    const chat: IChatModel = await ChatService.insert(req.body.user);
 
     res.status(201).json(chat);
   } catch (error) {
@@ -63,7 +63,7 @@ export async function deleteChat(
   next: NextFunction
 ): Promise<void> {
   try {
-    const chat: IChatModel = await ChatService.delete(req.params.id);
+    const chat: IChatModel = await ChatService.delete(req.params.id, req.body.user);
 
     res.status(200).json(chat);
   } catch (error) {
@@ -86,7 +86,8 @@ export async function addChat(
   try {
     const user: IUserModel = await ChatService.invite(
       req.body.chatid,
-      req.body.userid
+      req.body.userid,
+      req.body.user
     );
 
     res.status(200).json(user);
@@ -110,8 +111,8 @@ export async function handleInvite(
   try {
     const user: IUserModel = await ChatService.handleInvite(
       req.body.chatid,
-      req.body.userid,
-      req.body.accept
+      req.body.accept,
+      req.body.user
     );
 
     res.status(200).json(user);
@@ -135,7 +136,7 @@ export async function removeChat(
   try {
     const user: IUserModel = await ChatService.remove(
       req.body.chatid,
-      req.body.userid
+      req.body.user
     );
 
     res.status(200).json(user);

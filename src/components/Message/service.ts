@@ -29,7 +29,6 @@ const MessageService: IMessageService = {
       //check if user is in a chat before adding a message to it
       const authorCandidate: IUserModel = await UserModel.findById(body.author);
 
-      console.log("checking", body, authorCandidate.chats);
 
       if (authorCandidate.chats.includes(body.id))
         return await MessageModel.create(body);

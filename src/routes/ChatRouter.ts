@@ -18,12 +18,6 @@ const router: Router = Router();
  *    - "application/json"
  *    produces:
  *    - "application/json"
- *    parameters:
- *    - in: "body"
- *      name: "body"
- *      required: true
- *      example:
- *        id: 1234809412
  *    responses:
  *      201:
  *        description: Chat successfully created.
@@ -31,10 +25,9 @@ const router: Router = Router();
  *          application/json:
  *            example:
  *              messages: []
- *              members: ["1234809412"]
- *              creator: 1234809412
+ *              members: ["stevejobs@apple.com"]
+ *              creator: stevejobs@apple.com
  *              membersTyping: []
- *              _id: 1329038120938
  *      400:
  *        description: Chat creation failed.
  */
@@ -61,9 +54,9 @@ router.post("/", ChatComponent.insert);
  *          application/json:
  *            example:
  *              messages: ["123132", "132133", "1231233"]
- *              members: ["1234124", "41424142", "1442142"]
- *              creator: 1234809412
- *              membersTyping: ["1234124"]
+ *              members: ["stevejobs@apple.com"]
+ *              creator: stevejobs@apple.com
+ *              membersTyping: ["stevejobs@apple.com"]
  *              _id: 1329038120938
  *      400:
  *        description: Get chat failed.
@@ -91,9 +84,9 @@ router.get("/:id", ChatComponent.findOne);
  *          application/json:
  *            example:
  *              messages: ["123132", "132133", "1231233"]
- *              members: ["1234124", "41424142", "1442142"]
- *              creator: 1234809412
- *              membersTyping: ["1234124"]
+ *              members: ["stevejobs@apple.com", "billnye@science.net"]
+ *              creator: stevejobs@apple.com
+ *              membersTyping: ["stevejobs@apple.com"]
  *              _id: 1329038120938
  *      400:
  *        description: Failed to delete chat.
@@ -118,7 +111,7 @@ router.delete("/:id", ChatComponent.removeChat);
  *      description: "User and chat info to invite user to chat."
  *      required: true
  *      example:
- *        userid: 5dba164e8f73153ba8930430
+ *        userid: "jake123@mail.com"
  *        chatid: 5dba16978f73153ba8930431
  *    responses:
  *      200:
@@ -146,7 +139,6 @@ router.post("/invite", ChatComponent.addChat);
  *      description: "Handles an invite to a chat."
  *      required: true
  *      example:
- *        userid: 5dba164e8f73153ba8930430
  *        chatid: 5dba16978f73153ba8930431
  *        accept: true
  *        
@@ -156,7 +148,6 @@ router.post("/invite", ChatComponent.addChat);
  *        content:
  *          application/json:
  *            example:
- *              _id: userid_1233
  *              email: stevejobs@apple.com
  *              chats: ["5dba16978f73153ba8930431"]
  *              chatRequests: []
@@ -185,7 +176,6 @@ router.post("handleInvite", ChatComponent.handleInvite);
  *      description: "User and chat info to remove user from chat."
  *      required: true
  *      example:
- *        userid: 5dba164e8f73153ba8930430
  *        chatid: 5dba16978f73153ba8930431
  *    responses:
  *      200:
@@ -193,7 +183,6 @@ router.post("handleInvite", ChatComponent.handleInvite);
  *        content:
  *          application/json:
  *            example:
- *              _id: userid_1233
  *              email: stevejobs@apple.com
  *              chats: []
  *              chatRequests: []

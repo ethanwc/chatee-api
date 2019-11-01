@@ -32,22 +32,14 @@ const ChatService: IChatService = {
   },
 
   /**
-   * @param {IChatModel} chat
-   * @returns {Promise < IChatModel >}
+   * @param {IUserModel} user
+   * @returns {Promise < IUserModel >}
    * @memberof ChatService
    */
-  async insert(body: IChatModel): Promise<IChatModel> {
+  async insert(user: IUserModel): Promise<IChatModel> {
     try {
-      const validate: Joi.ValidationResult<IChatModel> = ChatValidation.insert(
-        body
-      );
-
-      if (validate.error) {
-        throw new Error(validate.error.message);
-      }
-
       const chat: IChatModel = new ChatModel({
-        members: [body.id]
+        members: [user.email]
       });
       const establishedChat: IChatModel = await ChatModel.create(chat);
 
@@ -58,23 +50,26 @@ const ChatService: IChatService = {
   },
 
   /**
-   * @param {string} id
+   * @param {string} chatid
+   * @param {IUserModel} user
    * @returns {Promise < IChatModel >}
    * @memberof ChatService
    */
-  async delete(id: string): Promise<IChatModel> {
+  async delete(chatid: string, user: IUserModel): Promise<IChatModel> {
     try {
       const validate: Joi.ValidationResult<{
-        id: string;
+        chatid: string;
       }> = ChatValidation.remove({
-        id
+        chatid
       });
 
       if (validate.error) {
         throw new Error(validate.error.message);
       }
 
-      const chat: IChatModel = await ChatModel.findByIdAndRemove(id);
+      //todo: check if user is chat owner b4 delete
+
+      const chat: IChatModel = await ChatModel.findByIdAndRemove(chatid);
 
       return chat;
     } catch (error) {
@@ -85,10 +80,16 @@ const ChatService: IChatService = {
   /**
    * @param {string} chatid
    * @param {string} userid
+   * @param {IUserModel} user
    * @returns {Promise < IUserModel >}
    * @memberof ChatService
    */
-  async invite(chatid: string, userid: string): Promise<IUserModel> {
+  async invite(
+    chatid: string,
+    userid: string,
+    user: IUserModel
+  ): Promise<IUserModel> {
+    const email = user.email;
     try {
       const validate: Joi.ValidationResult<{
         chatid: string;
@@ -102,10 +103,13 @@ const ChatService: IChatService = {
         throw new Error(validate.error.message);
       }
 
-      await UserModel.update({ _id: userid }, { $addToSet: { chats: chatid } });
-      let updatedUser = await UserModel.findById(userid);
+      //todo: check that the user is in the chat b4 inviting
 
-      return updatedUser;
+      await UserModel.update(
+        { email: email },
+        { $addToSet: { chats: chatid } }
+      );
+      return await UserModel.findOne({ email: email });
     } catch (error) {
       throw new Error(error.message);
     }
@@ -113,24 +117,24 @@ const ChatService: IChatService = {
 
   /**
    * @param {string} chatid
-   * @param {string} userid
    * @param {boolean} accept
+   * @param {IUserModel} user
    * @returns {Promise < IUserModel >}
    * @memberof ChatService
    */
   async handleInvite(
     chatid: string,
-    userid: string,
-    accept: boolean
+    accept: boolean,
+    user: IUserModel
   ): Promise<IUserModel> {
+    const email = user.email;
+
     try {
       const validate: Joi.ValidationResult<{
         chatid: string;
-        userid: string;
         accept: boolean;
       }> = ChatValidation.handleInvite({
         chatid,
-        userid,
         accept
       });
 
@@ -138,17 +142,22 @@ const ChatService: IChatService = {
         throw new Error(validate.error.message);
       }
 
+      //todo: redo
+
       //chatreq -> chat or chatreq -> nothing
       if (accept)
-        await UserModel.update(
-          { _id: userid },
+        await UserModel.updateOne(
+          { email: email },
           { $push: { chats: chatid } },
           { $pull: { chatRequests: chatid } }
         );
       else
-        await UserModel.update({ _id: userid }, { $pull: { chatsRequests: chatid } });
+        await UserModel.updateOne(
+          { email: email },
+          { $pull: { chatsRequests: chatid } }
+        );
 
-      return await UserModel.findById(userid);
+      return await UserModel.findOne({ email: email });
     } catch (error) {
       throw new Error(error.message);
     }
@@ -156,29 +165,26 @@ const ChatService: IChatService = {
 
   /**
    * @param {string} chatid
-   * @param {string} userid
+   * @param {IUserModel} user
    * @returns {Promise < IUserModel >}
    * @memberof ChatService
    */
-  async remove(chatid: string, userid: string): Promise<IUserModel> {
+  async remove(chatid: string, user: IUserModel): Promise<IUserModel> {
+    const email = user.email;
     try {
       const validate: Joi.ValidationResult<{
         chatid: string;
-        userid: string;
-      }> = ChatValidation.invite({
-        chatid,
-        userid
+      }> = ChatValidation.remove({
+        chatid
       });
 
       if (validate.error) {
         throw new Error(validate.error.message);
       }
 
-      await UserModel.update({ _id: userid }, { $pull: { chats: chatid } });
+      await UserModel.update({ email: email }, { $pull: { chats: chatid } });
 
-      let updatedUser = await UserModel.findById(userid);
-
-      return updatedUser;
+      return await UserModel.findOne({ email: email });
     } catch (error) {
       throw new Error(error.message);
     }

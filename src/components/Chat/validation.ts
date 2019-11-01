@@ -48,17 +48,17 @@ class ChatValidation extends Validation {
   }
 
   /**
-   * @param {{ id: string }} body
-   * @returns {Joi.ValidationResult<{ id: string }>}
+   * @param {{ chatid: string }} body
+   * @returns {Joi.ValidationResult<{ chatid: string }>}
    * @memberof ChatValidation
    */
   remove(body: {
-    id: string;
+    chatid: string;
   }): Joi.ValidationResult<{
-    id: string;
+    chatid: string;
   }> {
     const schema: Joi.Schema = Joi.object().keys({
-      id: Joi.string().required()
+      chatid: Joi.string().required()
     });
 
     return Joi.validate(body, schema);
@@ -85,22 +85,19 @@ class ChatValidation extends Validation {
   }
 
    /**
-   * @param {{ chatid: string, userid: string, accept: boolean }} body
+   * @param {{ chatid: string, accept: boolean }} body
    * @returns {Joi.ValidationResult<IUserModel>}
    * @memberof UserValidation
    */
   handleInvite(body: {
-    userid: string;
     chatid: string;
     accept: boolean;
   }): Joi.ValidationResult<{
     chatid: string;
-    userid: string;
     accept: boolean;
   }> {
     const schema: Joi.Schema = Joi.object().keys({
       chatid: this.customJoi.objectId().required(),
-      userid: this.customJoi.objectId().required(),
       accept: Joi.boolean().required()
     });
 

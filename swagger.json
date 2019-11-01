@@ -108,16 +108,6 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "example": {
-              "id": 1234809412
-            }
-          }
-        ],
         "responses": {
           "201": {
             "description": "Chat successfully created.",
@@ -126,11 +116,10 @@
                 "example": {
                   "messages": [],
                   "members": [
-                    "1234809412"
+                    "stevejobs@apple.com"
                   ],
-                  "creator": 1234809412,
-                  "membersTyping": [],
-                  "_id": 1329038120938
+                  "creator": "stevejobs@apple.com",
+                  "membersTyping": []
                 }
               }
             }
@@ -169,13 +158,11 @@
                     "1231233"
                   ],
                   "members": [
-                    "1234124",
-                    "41424142",
-                    "1442142"
+                    "stevejobs@apple.com"
                   ],
-                  "creator": 1234809412,
+                  "creator": "stevejobs@apple.com",
                   "membersTyping": [
-                    "1234124"
+                    "stevejobs@apple.com"
                   ],
                   "_id": 1329038120938
                 }
@@ -214,13 +201,12 @@
                     "1231233"
                   ],
                   "members": [
-                    "1234124",
-                    "41424142",
-                    "1442142"
+                    "stevejobs@apple.com",
+                    "billnye@science.net"
                   ],
-                  "creator": 1234809412,
+                  "creator": "stevejobs@apple.com",
                   "membersTyping": [
-                    "1234124"
+                    "stevejobs@apple.com"
                   ],
                   "_id": 1329038120938
                 }
@@ -252,7 +238,7 @@
             "description": "User and chat info to invite user to chat.",
             "required": true,
             "example": {
-              "userid": "5dba164e8f73153ba8930430",
+              "userid": "jake123@mail.com",
               "chatid": "5dba16978f73153ba8930431"
             }
           }
@@ -286,7 +272,6 @@
             "description": "Handles an invite to a chat.",
             "required": true,
             "example": {
-              "userid": "5dba164e8f73153ba8930430",
               "chatid": "5dba16978f73153ba8930431",
               "accept": true
             }
@@ -298,7 +283,6 @@
             "content": {
               "application/json": {
                 "example": {
-                  "_id": "userid_1233",
                   "email": "stevejobs@apple.com",
                   "chats": [
                     "5dba16978f73153ba8930431"
@@ -335,7 +319,6 @@
             "description": "User and chat info to remove user from chat.",
             "required": true,
             "example": {
-              "userid": "5dba164e8f73153ba8930430",
               "chatid": "5dba16978f73153ba8930431"
             }
           }
@@ -346,7 +329,6 @@
             "content": {
               "application/json": {
                 "example": {
-                  "_id": "userid_1233",
                   "email": "stevejobs@apple.com",
                   "chats": [],
                   "chatRequests": [],

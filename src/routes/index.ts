@@ -4,7 +4,7 @@ import * as jwtConfig from "../config/middleware/jwtAuth";
 import * as swaggerUi from "swagger-ui-express";
 import AuthRouter from "./AuthRouter";
 import UserRouter from "./UserRouter";
-// import ChatRouter from './ChatRouter';
+import ChatRouter from './ChatRouter';
 // import MessageRouter from './MessageRouter';
 let swaggerDoc: Object;
 
@@ -39,7 +39,7 @@ export function init(app: express.Application): void {
    *  Also, check if user authenticated
    * @constructs
    */
-  // app.use('/v1/chats', jwtConfig.isAuthenticated, ChatRouter);
+  app.use('/v1/chats', jwtConfig.isAuthenticated, ChatRouter);
 
   /**
    * @description

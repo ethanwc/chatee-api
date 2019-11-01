@@ -1,5 +1,5 @@
-import { AuthComponent } from '../components';
-import { Router } from 'express';
+import { AuthComponent } from "../components";
+import { Router } from "express";
 
 /**
  * @constant {express.Router}
@@ -12,7 +12,7 @@ const router: Router = Router();
  * @swagger
  * /auth/signup/:
  *  post:
- *    description: sign up user to application
+ *    description: Sign up user for the application
  *    tags: ["auth"]
  *    requestBody:
  *      description: sign up body
@@ -26,15 +26,16 @@ const router: Router = Router();
  *            password: test_test
  *    responses:
  *      200:
- *        description: user successfuly signed in
+ *        description: User has been signed up
  *        content:
  *          appication/json:
  *            example:
  *              status: 200
  *              logged: true
- *              message: Sign in successfull!!
+ *              token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+ *              message: Sign up successfull
  *      400:
- *        description: sign in failed
+ *        description: Sign up failed
  *        content:
  *          application/json:
  *            example:
@@ -42,16 +43,16 @@ const router: Router = Router();
  *              logged: false
  *              message: Email already exists
  */
-router.post('/signup', AuthComponent.signup);
+router.post("/signup", AuthComponent.signup);
 
 /**
  * POST method route
  * @example http://localhost:PORT/login
- * 
+ *
  * @swagger
  * /auth/login/:
  *  post:
- *    description: Login user to application
+ *    description: Login user to the application
  *    tags: ["auth"]
  *    requestBody:
  *      description: login body
@@ -65,13 +66,14 @@ router.post('/signup', AuthComponent.signup);
  *            password: test_test
  *    responses:
  *      200:
- *        description: user successfuly logged
+ *        description: User has been logged in
  *        content:
  *          appication/json:
  *            example:
  *              status: 200
  *              logged: true
- *              message: Successfully logged!
+ *              token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+ *              message: Login successfull
  *      401:
  *        description: Not logged, invalid credentials
  *        content:
@@ -81,8 +83,7 @@ router.post('/signup', AuthComponent.signup);
  *              logged: false
  *              message: Invalid credentials
  */
-router.post('/login', AuthComponent.login);
-
+router.post("/login", AuthComponent.login);
 
 /**
  * @export {express.Router}

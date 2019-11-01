@@ -16,7 +16,8 @@ export interface IUserModel extends Document {
   chats: string[];
   chatRequests: string[];
   friends: string[];
-  friendRequests: string[];
+  incomingFriendRequests: string[];
+  outgoingFriendRequests: string[];
   passwordResetToken: string;
   passwordResetExpires: Date;
   google: string;
@@ -46,7 +47,8 @@ const UserSchema: Schema = new Schema(
     chats: Array(),
     chatRequests: Array(),
     friends: Array(),
-    friendRequests: Array(),
+    incomingFriendRequests: Array(),
+    outgoingFriendRequests: Array(),
     passwordResetToken: String,
     passwordResetExpires: Date,
     google: String,

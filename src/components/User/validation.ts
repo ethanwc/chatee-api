@@ -1,6 +1,6 @@
-import * as Joi from 'joi';
-import Validation from '../validation';
-import { IUserModel } from './model';
+import * as Joi from "joi";
+import Validation from "../validation";
+import { IUserModel } from "./model";
 
 /**
  * @export
@@ -8,52 +8,83 @@ import { IUserModel } from './model';
  * @extends Validation
  */
 class UserValidation extends Validation {
+  /**
+   * Creates an instance of UserValidation.
+   * @memberof UserValidation
+   */
+  constructor() {
+    super();
+  }
 
-    /**
-     * Creates an instance of UserValidation.
-     * @memberof UserValidation
-     */
-    constructor() {
-        super();
-    }
+  /**
+   * @param {{ user: string }} body
+   * @returns {Joi.ValidationResult<{ user: string }>}
+   * @memberof UserValidation
+   */
+  user(body: {
+    user: string;
+  }): Joi.ValidationResult<{
+    user: string;
+  }> {
+    const schema: Joi.Schema = Joi.object().keys({
+      user: Joi.string()
+        .email()
+        .required()
+    });
 
-    /**
-     * @param {{ id: string }} body
-     * @returns {Joi.ValidationResult<{ id: string }>}
-     * @memberof UserValidation
-     */
-    getUser(
-        body: {
-            id: string
-        }
-    ): Joi.ValidationResult < {
-        id: string
-    } > {
-        const schema: Joi.Schema = Joi.object().keys({
-            id: this.customJoi.objectId().required()
-        });
+    return Joi.validate(body, schema);
+  }
 
-        return Joi.validate(body, schema);
-    }
+  /**
+   * @param {{ user: string; potentialFriend: string }} body
+   * @returns {Joi.ValidationResult<{ user: string }>}
+   * @memberof UserValidation
+   */
+  friend(body: {
+    user: string;
+    potentialFriend: string;
+  }): Joi.ValidationResult<{
+    user: string;
+    potentialFriend: string;
+  }> {
+    const schema: Joi.Schema = Joi.object().keys({
+      user: Joi.string()
+        .email()
+        .required(),
+      potentialFriend: Joi.string()
+        .email()
+        .required()
+    });
 
-    /**
-     * @param {{ id: string }} body
-     * @returns {Joi.ValidationResult<{ id: string }>}
-     * @memberof UserValidation
-     */
-    removeUser(
-        body: {
-            id: string
-        }
-    ): Joi.ValidationResult < {
-        id: string
-    } > {
-        const schema: Joi.Schema = Joi.object().keys({
-            id: this.customJoi.objectId().required()
-        });
+    return Joi.validate(body, schema);
+  }
 
-        return Joi.validate(body, schema);
-    }
+  /**
+   * @param {{ user: string; potentialFriend: string; accept: boolean }} body
+   * @returns {Joi.ValidationResult<{ user: string }>}
+   * @memberof UserValidation
+   */
+  handleFriend(body: {
+    user: string;
+    potentialFriend: string;
+    accept: boolean;
+  }): Joi.ValidationResult<{
+    user: string;
+    potentialFriend: string;
+    accept: boolean;
+  }> {
+    const schema: Joi.Schema = Joi.object().keys({
+      user: Joi.string()
+        .email()
+        .required(),
+      potentialFriend: Joi.string()
+        .email()
+        .required(),
+        accept: Joi.boolean().required()
+    });
+
+    return Joi.validate(body, schema);
+  }
 }
 
 export default new UserValidation();

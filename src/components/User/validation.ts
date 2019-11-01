@@ -80,7 +80,7 @@ class UserValidation extends Validation {
       potentialFriend: Joi.string()
         .email()
         .required(),
-        accept: Joi.boolean().required()
+      accept: Joi.boolean().required()
     });
 
     return Joi.validate(body, schema);

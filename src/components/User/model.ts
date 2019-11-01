@@ -10,6 +10,7 @@ import { NextFunction } from "express";
  * @extends {Document}
  */
 export interface IUserModel extends Document {
+  id: string;
   email: string;
   password: string;
   chats: string[];
@@ -19,7 +20,7 @@ export interface IUserModel extends Document {
   passwordResetToken: string;
   passwordResetExpires: Date;
   google: string;
-  tokens: string;
+  token: string;
   network: IUserModel[];
 
   profile: {
@@ -49,7 +50,7 @@ const UserSchema: Schema = new Schema(
     passwordResetToken: String,
     passwordResetExpires: Date,
     google: String,
-    tokens: String,
+    token: String,
 
     profile: {
       name: String,

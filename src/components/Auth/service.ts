@@ -2,6 +2,8 @@ import * as Joi from 'joi';
 import AuthValidation from './validation';
 import UserModel, { IUserModel } from '../User/model';
 import { IAuthService } from './interface';
+import * as jwt from "jsonwebtoken";
+import app from "../../config/server/server";
 
 /**
  * @export
@@ -57,14 +59,24 @@ const AuthService: IAuthService = {
 
             const user: IUserModel = await UserModel.findOne({
                 email: body.email
-            });
-
-            //todo: set user token to new token...
+            });            
         
             const isMatched: boolean = user && await user.comparePassword(body.password);
  
             if (isMatched) {
-                return user;
+
+                const token: string = jwt.sign({ email: user.email }, app.get("secret"), {
+                    expiresIn: "60m"
+                  });
+
+                  //set user's token and update in db, then return updated user
+                  user.token = token;
+
+                  await UserModel.update({email: body.email}, user);
+
+                 return UserModel.findOne({email: body.email});
+
+
             }
 
             throw new Error('Invalid email or password.');

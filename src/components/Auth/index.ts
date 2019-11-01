@@ -2,8 +2,6 @@ import AuthService from "./service";
 import HttpError from "../../config/error";
 import { IUserModel } from "../User/model";
 import { NextFunction, Request, Response } from "express";
-import * as jwt from "jsonwebtoken";
-import app from "../../config/server/server";
 
 /**
  * @export
@@ -18,15 +16,9 @@ export async function signup(
   next: NextFunction
 ): Promise<void> {
   try {
-    const user: IUserModel = await AuthService.createUser(req.body);
-    const token: string = jwt.sign({ email: user.email }, app.get("secret"), {
-      expiresIn: "60m"
-    });
-
     res.json({
       status: 201,
       logged: true,
-      token: token,
       message: "User succesfully registered."
     });
   } catch (error) {
@@ -54,18 +46,16 @@ export async function login(
 ): Promise<void> {
   try {
     const user: IUserModel = await AuthService.getUser(req.body);
-
-    const token: string = jwt.sign({ email: user.email }, app.get("secret"), {
-      expiresIn: "60m"
-    });
-
+   
     res.json({
       status: 200,
       logged: true,
-      token: token,
+      token: user.token,
       message: "Sign in successfull",
       id: user.id
     });
+    //user id not passed here?
+
   } catch (error) {
     if (error.code === 500) {
       return next(new HttpError(error.message.status, error.message));

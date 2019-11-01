@@ -1,39 +1,43 @@
-import AuthService from './service';
-import HttpError from '../../config/error';
-import { IUserModel } from '../User/model';
-import { NextFunction, Request, Response } from 'express';
-import * as jwt from 'jsonwebtoken';
-import app from '../../config/server/server';
+import AuthService from "./service";
+import HttpError from "../../config/error";
+import { IUserModel } from "../User/model";
+import { NextFunction, Request, Response } from "express";
+import * as jwt from "jsonwebtoken";
+import app from "../../config/server/server";
 
 /**
  * @export
- * @param {Request} req 
- * @param {Response} res 
- * @param {NextFunction} next 
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
  * @returns {Promise < void >}
  */
-export async function signup(req: Request, res: Response, next: NextFunction): Promise < void > {
-    try {
-        const user: IUserModel = await AuthService.createUser(req.body);
-        const token: string = jwt.sign({ email: user.email }, app.get('secret'), {
-            expiresIn: '60m'
-        });
-        
-        res.json({
-            status: 201,
-            logged: true,
-            token: token,
-            message: 'User succesfully registered.'
-        });
-    } catch (error) {
-        if (error.code === 500) {
-            return next(new HttpError(error.message.status, error.message));
-        }
-        res.json({
-            status: 400,
-            message: error.message
-        });
+export async function signup(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const user: IUserModel = await AuthService.createUser(req.body);
+    const token: string = jwt.sign({ email: user.email }, app.get("secret"), {
+      expiresIn: "60m"
+    });
+
+    res.json({
+      status: 201,
+      logged: true,
+      token: token,
+      message: "User succesfully registered."
+    });
+  } catch (error) {
+    if (error.code === 500) {
+      return next(new HttpError(error.message.status, error.message));
     }
+    res.json({
+      status: 400,
+      message: error.message
+    });
+  }
 }
 
 /**
@@ -43,29 +47,33 @@ export async function signup(req: Request, res: Response, next: NextFunction): P
  * @param {NextFunction} next
  * @returns {Promise < void >}
  */
-export async function login(req: Request, res: Response, next: NextFunction): Promise < void > {
-    try {
-        const user: IUserModel = await AuthService.getUser(req.body);
+export async function login(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const user: IUserModel = await AuthService.getUser(req.body);
 
-        const token: string = jwt.sign({ email: user.email }, app.get('secret'), {
-            expiresIn: '60m'
-        });
-        
-        res.json({
-            status: 200,
-            logged: true,
-            token: token,
-            message: 'Sign in successfull'
-        });
+    const token: string = jwt.sign({ email: user.email }, app.get("secret"), {
+      expiresIn: "60m"
+    });
 
-    } catch (error) {
-        if (error.code === 500) {
-            return next(new HttpError(error.message.status, error.message));
-        }
-
-        res.json({
-            status: 400,
-            message: error.message
-        });
+    res.json({
+      status: 200,
+      logged: true,
+      token: token,
+      message: "Sign in successfull",
+      id: user.id
+    });
+  } catch (error) {
+    if (error.code === 500) {
+      return next(new HttpError(error.message.status, error.message));
     }
+
+    res.json({
+      status: 400,
+      message: error.message
+    });
+  }
 }

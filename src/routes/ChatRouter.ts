@@ -32,6 +32,7 @@ const router: Router = Router();
  *            example:
  *              messages: []
  *              members: ["1234809412"]
+ *              creator: 1234809412
  *              membersTyping: []
  *              _id: 1329038120938
  *      400:
@@ -61,6 +62,7 @@ router.post("/", ChatComponent.insert);
  *            example:
  *              messages: ["123132", "132133", "1231233"]
  *              members: ["1234124", "41424142", "1442142"]
+ *              creator: 1234809412
  *              membersTyping: ["1234124"]
  *              _id: 1329038120938
  *      400:
@@ -90,6 +92,7 @@ router.get("/:id", ChatComponent.findOne);
  *            example:
  *              messages: ["123132", "132133", "1231233"]
  *              members: ["1234124", "41424142", "1442142"]
+ *              creator: 1234809412
  *              membersTyping: ["1234124"]
  *              _id: 1329038120938
  *      400:
@@ -99,12 +102,12 @@ router.delete("/:id", ChatComponent.removeChat);
 
 /**
  * POST method route
- * @example http://localhost:PORT/api/chat/addChat
+ * @example http://localhost:PORT/api/chat/invite
  * @swagger
- * /chat/addChat:
+ * /chat/invite:
  *  post:
  *    tags: ["chat"]
- *    summary: "Add user to a chat"
+ *    summary: "Invite user to a chat"
  *    consumes:
  *    - "application/json"
  *    produces:
@@ -112,26 +115,16 @@ router.delete("/:id", ChatComponent.removeChat);
  *    parameters:
  *    - in: "body"
  *      name: "body"
- *      description: "User and chat info to add user to chat."
+ *      description: "User and chat info to invite user to chat."
  *      required: true
  *      example:
  *        userid: 5dba164e8f73153ba8930430
  *        chatid: 5dba16978f73153ba8930431
  *    responses:
  *      200:
- *        description: User successfully added to new chat.
- *        content:
- *          application/json:
- *            example:
- *              _id: userid_1233
- *              email: stevejobs@apple.com
- *              chats: ["5dba16978f73153ba8930431"]
- *              chatRequests: []
- *              friends: []
- *              friendRequests: []
- *              tokens: []
+ *        description: User successfully invited to new chat.
  *      400:
- *        description: Adding failed.
+ *        description: Inviting failed.
  */
 router.post("/invite", ChatComponent.addChat);
 
@@ -169,7 +162,6 @@ router.post("/invite", ChatComponent.addChat);
  *              chatRequests: []
  *              friends: []
  *              friendRequests: []
- *              tokens: []
  *      400:
  *        description: Handling failed.
  */
@@ -207,7 +199,6 @@ router.post("handleInvite", ChatComponent.handleInvite);
  *              chatRequests: []
  *              friends: []
  *              friendRequests: []
- *              tokens: []
  *      400:
  *        description: Removing failed.
  */

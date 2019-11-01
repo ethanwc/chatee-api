@@ -42,7 +42,6 @@
               "application/json": {
                 "example": {
                   "userid": 1234,
-                  "token": "jadw9d0aw8d9a8d0ajdo2kjalkjsd",
                   "logged": true
                 }
               }
@@ -129,6 +128,7 @@
                   "members": [
                     "1234809412"
                   ],
+                  "creator": 1234809412,
                   "membersTyping": [],
                   "_id": 1329038120938
                 }
@@ -173,6 +173,7 @@
                     "41424142",
                     "1442142"
                   ],
+                  "creator": 1234809412,
                   "membersTyping": [
                     "1234124"
                   ],
@@ -217,6 +218,7 @@
                     "41424142",
                     "1442142"
                   ],
+                  "creator": 1234809412,
                   "membersTyping": [
                     "1234124"
                   ],
@@ -231,12 +233,12 @@
         }
       }
     },
-    "/chat/addChat": {
+    "/chat/invite": {
       "post": {
         "tags": [
           "chat"
         ],
-        "summary": "Add user to a chat",
+        "summary": "Invite user to a chat",
         "consumes": [
           "application/json"
         ],
@@ -247,7 +249,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "User and chat info to add user to chat.",
+            "description": "User and chat info to invite user to chat.",
             "required": true,
             "example": {
               "userid": "5dba164e8f73153ba8930430",
@@ -257,25 +259,10 @@
         ],
         "responses": {
           "200": {
-            "description": "User successfully added to new chat.",
-            "content": {
-              "application/json": {
-                "example": {
-                  "_id": "userid_1233",
-                  "email": "stevejobs@apple.com",
-                  "chats": [
-                    "5dba16978f73153ba8930431"
-                  ],
-                  "chatRequests": [],
-                  "friends": [],
-                  "friendRequests": [],
-                  "tokens": []
-                }
-              }
-            }
+            "description": "User successfully invited to new chat."
           },
           "400": {
-            "description": "Adding failed."
+            "description": "Inviting failed."
           }
         }
       }
@@ -318,8 +305,7 @@
                   ],
                   "chatRequests": [],
                   "friends": [],
-                  "friendRequests": [],
-                  "tokens": []
+                  "friendRequests": []
                 }
               }
             }
@@ -365,8 +351,7 @@
                   "chats": [],
                   "chatRequests": [],
                   "friends": [],
-                  "friendRequests": [],
-                  "tokens": []
+                  "friendRequests": []
                 }
               }
             }
@@ -501,53 +486,6 @@
         }
       }
     },
-    "/users": {
-      "post": {
-        "tags": [
-          "user"
-        ],
-        "summary": "Create a new user",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "User info to create a new user.",
-            "required": true,
-            "example": {
-              "name": "superloser",
-              "email": "stevejobs@apple.com"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "User successfully created.",
-            "content": {
-              "application/json": {
-                "example": {
-                  "_id": "userid_1233",
-                  "email": "stevejobs@apple.com",
-                  "chats": [],
-                  "chatRequests": [],
-                  "friends": [],
-                  "friendRequests": [],
-                  "tokens": []
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "User creation failed."
-          }
-        }
-      }
-    },
     "/users/{id}": {
       "get": {
         "tags": [
@@ -575,8 +513,7 @@
                   "chats": [],
                   "chatRequests": [],
                   "friends": [],
-                  "friendRequests": [],
-                  "tokens": []
+                  "friendRequests": []
                 }
               }
             }
@@ -612,8 +549,7 @@
                   "chats": [],
                   "chatRequests": [],
                   "friends": [],
-                  "friendRequests": [],
-                  "tokens": []
+                  "friendRequests": []
                 }
               }
             }
@@ -696,8 +632,7 @@
                   "friends": [
                     "friendid_112345"
                   ],
-                  "friendRequests": [],
-                  "tokens": []
+                  "friendRequests": []
                 }
               }
             }
@@ -785,7 +720,6 @@
                   "chatRequests": [],
                   "friends": [],
                   "friendRequests": [],
-                  "tokens": [],
                   "profile": []
                 }
               }

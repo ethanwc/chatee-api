@@ -58,6 +58,8 @@ const AuthService: IAuthService = {
             const user: IUserModel = await UserModel.findOne({
                 email: body.email
             });
+
+            //todo: set user token to new token...
         
             const isMatched: boolean = user && await user.comparePassword(body.password);
  

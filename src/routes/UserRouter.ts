@@ -6,43 +6,42 @@ import { UserComponent } from "../components";
  */
 const router: Router = Router();
 
-/**
- * POST method route
- * @example http://localhost:PORT/api/users
- * @swagger
- * /users:
- *  post:
- *    tags: ["user"]
- *    summary: "Create a new user"
- *    consumes:
- *    - "application/json"
- *    produces:
- *    - "application/json"
- *    parameters:
- *    - in: "body"
- *      name: "body"
- *      description: "User info to create a new user."
- *      required: true
- *      example:
- *        name: superloser
- *        email: stevejobs@apple.com
- *    responses:
- *      201:
- *        description: User successfully created.
- *        content:
- *          application/json:
- *            example:
- *              _id: userid_1233
- *              email: stevejobs@apple.com
- *              chats: []
- *              chatRequests: []
- *              friends: []
- *              friendRequests: []
- *              tokens: []
- *      400:
- *        description: User creation failed.
- */
-router.post("/", UserComponent.create);
+// /**
+//  * POST method route
+//  * @example http://localhost:PORT/api/users
+//  * @swagger
+//  * /users:
+//  *  post:
+//  *    tags: ["user"]
+//  *    summary: "Create a new user"
+//  *    consumes:
+//  *    - "application/json"
+//  *    produces:
+//  *    - "application/json"
+//  *    parameters:
+//  *    - in: "body"
+//  *      name: "body"
+//  *      description: "User info to create a new user."
+//  *      required: true
+//  *      example:
+//  *        name: superloser
+//  *        email: stevejobs@apple.com
+//  *    responses:
+//  *      201:
+//  *        description: User successfully created.
+//  *        content:
+//  *          application/json:
+//  *            example:
+//  *              _id: userid_1233
+//  *              email: stevejobs@apple.com
+//  *              chats: []
+//  *              chatRequests: []
+//  *              friends: []
+//  *              friendRequests: []
+//  *      400:
+//  *        description: User creation failed.
+//  */
+// router.post("/", UserComponent.create);
 
 /**
  * GET method route
@@ -70,7 +69,6 @@ router.post("/", UserComponent.create);
  *              chatRequests: []
  *              friends: []
  *              friendRequests: []
- *              tokens: []
  *      400:
  *        description: Get user failed.
  */
@@ -102,7 +100,6 @@ router.get("/:id", UserComponent.findOne);
  *              chatRequests: []
  *              friends: []
  *              friendRequests: []
- *              tokens: []
  *      400:
  *        description: Failed to delete user.
  */
@@ -170,7 +167,6 @@ router.post("/addFriend", UserComponent.addFriend);
  *              chatRequests: []
  *              friends: ["friendid_112345"]
  *              friendRequests: []
- *              tokens: []
  * 
  *      400:
  *        description: Handling request failed.
@@ -244,7 +240,6 @@ router.post("/removeFriend", UserComponent.removeFriend);
  *              chatRequests: []
  *              friends: []
  *              friendRequests: []
- *              tokens: []
  *              profile: []
  *      400:
  *        description: Modifying profile failed.

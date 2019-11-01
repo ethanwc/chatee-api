@@ -33,7 +33,6 @@ const router: Router = Router();
  *          application/json:
  *            example:  
  *              userid: 1234
- *              token: jadw9d0aw8d9a8d0ajdo2kjalkjsd
  *              logged: true
  *      400:
  *        description: Sign up failed, email already associated with an account.

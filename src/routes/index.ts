@@ -26,6 +26,12 @@ export function init(app: express.Application): void {
   const router: express.Router = express.Router();
 
   /**
+   * @description Forwards any requests to the /auth URI to our AuthRouter
+   * @constructs
+   */
+  app.use("/auth", AuthRouter);
+
+  /**
    * @description
    *  Forwards any requests to the /v1/users URI to our UserRouter
    *  Also, check if user authenticated
@@ -34,14 +40,9 @@ export function init(app: express.Application): void {
   app.use("/v1/users", jwtConfig.isAuthenticated, UserRouter);
 
   /**
-   * @description Forwards any requests to the /auth URI to our AuthRouter
-   * @constructs
-   */
-  app.use("/auth", AuthRouter);
-
-  /**
    * @description
    * Forwards any requests to the /chat URI to our ChatRouter
+   *  Also, check if user authenticated
    * @constructs
    */
   app.use("/v1/chat", jwtConfig.isAuthenticated, ChatRouter);
@@ -49,6 +50,7 @@ export function init(app: express.Application): void {
   /**
    * @description
    * Forwards any requests to the /message URI to our MessageRouter
+   *  Also, check if user authenticated
    * @constructs
    */
   app.use("/v1/message", jwtConfig.isAuthenticated, MessageRouter);

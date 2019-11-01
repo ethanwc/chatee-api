@@ -11,6 +11,7 @@ export interface IChatModel extends Document {
   messages: Array<string>;
   members: Array<string>;
   membersTyping: Array<string>;
+  creator: String;
   createdDate: Date;
   lastMessage: string;
   lastMessageDate: Date;
@@ -21,6 +22,7 @@ const ChatSchema: Schema = new Schema(
     messages: Array<String>(),
     members: Array<String>(),
     membersTyping: Array<String>(),
+    creator: String,
     createdDate: Date,
     lastMessage: String,
     lastMessageDate: Date

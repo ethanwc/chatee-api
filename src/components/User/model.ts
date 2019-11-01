@@ -19,7 +19,7 @@ export interface IUserModel extends Document {
   passwordResetToken: string;
   passwordResetExpires: Date;
   google: string;
-  tokens: AuthToken[];
+  tokens: string;
   network: IUserModel[];
 
   profile: {
@@ -32,10 +32,7 @@ export interface IUserModel extends Document {
   gravatar: (size: number) => string;
 }
 
-export type AuthToken = {
-  accessToken: string;
-  kind: string;
-};
+
 
 const UserSchema: Schema = new Schema(
   {
@@ -52,7 +49,7 @@ const UserSchema: Schema = new Schema(
     passwordResetToken: String,
     passwordResetExpires: Date,
     google: String,
-    tokens: Array,
+    tokens: String,
 
     profile: {
       name: String,

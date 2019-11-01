@@ -1,5 +1,5 @@
-import { AuthComponent } from "../components";
-import { Router } from "express";
+import { AuthComponent } from '../components';
+import { Router } from 'express';
 
 /**
  * @constant {express.Router}
@@ -12,66 +12,77 @@ const router: Router = Router();
  * @swagger
  * /auth/signup/:
  *  post:
+ *    description: sign up user to application
  *    tags: ["auth"]
- *    summary: "Sign up a user"
- *    consumes:
- *    - "application/json"
- *    produces:
- *    - "application/json" 
- *    parameters:
- *    - in: "body"
- *      name: "body"
- *      description: "User info required to create an account."
+ *    requestBody:
+ *      description: sign up body
  *      required: true
- *      example:
- *        email: stevejobs@apple.com
- *        password: ilovemicrosoft
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/UserSchema'
+ *          example:
+ *            email: test.user@mail.com
+ *            password: test_test
  *    responses:
- *      201:
- *        description: User successfully registered.
+ *      200:
+ *        description: user successfuly signed in
+ *        content:
+ *          appication/json:
+ *            example:
+ *              status: 200
+ *              logged: true
+ *              message: Sign in successfull!!
+ *      400:
+ *        description: sign in failed
  *        content:
  *          application/json:
- *            example:  
- *              userid: 1234
- *              logged: true
- *      400:
- *        description: Sign up failed, email already associated with an account.
+ *            example:
+ *              status: 400
+ *              logged: false
+ *              message: Email already exists
  */
-router.post("/signup", AuthComponent.signup);
+router.post('/signup', AuthComponent.signup);
 
 /**
  * POST method route
  * @example http://localhost:PORT/login
+ * 
  * @swagger
  * /auth/login/:
  *  post:
+ *    description: Login user to application
  *    tags: ["auth"]
- *    summary: "Sign in a user"
- *    consumes:
- *    - "application/json"
- *    produces:
- *    - "application/json" 
- *    parameters:
- *    - in: "body"
- *      name: "body"
- *      description: "User info required to create an account."
+ *    requestBody:
+ *      description: login body
  *      required: true
- *      example:
- *        email: stevejobs@apple.com
- *        password: ilovemicrosoft
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/UserSchema'
+ *          example:
+ *            email: test.user@mail.com
+ *            password: test_test
  *    responses:
  *      200:
- *        description: User successfully signed in.
+ *        description: user successfuly logged
+ *        content:
+ *          appication/json:
+ *            example:
+ *              status: 200
+ *              logged: true
+ *              message: Successfully logged!
+ *      401:
+ *        description: Not logged, invalid credentials
  *        content:
  *          application/json:
  *            example:
- *              userid: 1234
- *              token: jadw9d0aw8d9a8d0ajdo2kjalkjsd
- *              logged: true
- *      400:
- *        description: Invalid email or password.
+ *              status: 401
+ *              logged: false
+ *              message: Invalid credentials
  */
-router.post("/login", AuthComponent.login);
+router.post('/login', AuthComponent.login);
+
 
 /**
  * @export {express.Router}

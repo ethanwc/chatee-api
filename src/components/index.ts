@@ -1,6 +1,7 @@
-import * as AuthComponent from "./Auth";
-import * as UserComponent from "./User";
-import * as ChatComponent from "./Chat";
-import * as MessageComponent from "./Message";
+import * as AuthComponent from './Auth';
+import * as UserComponent from './User';
 
-export { AuthComponent, UserComponent, ChatComponent, MessageComponent };
+export {
+    AuthComponent, 
+    UserComponent
+};

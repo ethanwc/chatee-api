@@ -4,8 +4,8 @@ import * as jwtConfig from "../config/middleware/jwtAuth";
 import * as swaggerUi from "swagger-ui-express";
 import AuthRouter from "./AuthRouter";
 import UserRouter from "./UserRouter";
-import ChatRouter from "./ChatRouter";
-import MessageRouter from "./MessageRouter";
+// import ChatRouter from './ChatRouter';
+// import MessageRouter from './MessageRouter';
 let swaggerDoc: Object;
 
 try {
@@ -26,12 +26,6 @@ export function init(app: express.Application): void {
   const router: express.Router = express.Router();
 
   /**
-   * @description Forwards any requests to the /auth URI to our AuthRouter
-   * @constructs
-   */
-  app.use("/auth", AuthRouter);
-
-  /**
    * @description
    *  Forwards any requests to the /v1/users URI to our UserRouter
    *  Also, check if user authenticated
@@ -41,19 +35,25 @@ export function init(app: express.Application): void {
 
   /**
    * @description
-   * Forwards any requests to the /chat URI to our ChatRouter
+   *  Forwards any requests to the /v1/chats URI to our ChatRouter
    *  Also, check if user authenticated
    * @constructs
    */
-  app.use("/v1/chat", jwtConfig.isAuthenticated, ChatRouter);
+  // app.use('/v1/chats', jwtConfig.isAuthenticated, ChatRouter);
 
   /**
    * @description
-   * Forwards any requests to the /message URI to our MessageRouter
+   *  Forwards any requests to the /v1/messages URI to our MessageRouter
    *  Also, check if user authenticated
    * @constructs
    */
-  app.use("/v1/message", jwtConfig.isAuthenticated, MessageRouter);
+  // app.use('/v1/messages', jwtConfig.isAuthenticated, MessageRouter);
+
+  /**
+   * @description Forwards any requests to the /auth URI to our AuthRouter
+   * @constructs
+   */
+  app.use("/auth", AuthRouter);
 
   /**
    * @description

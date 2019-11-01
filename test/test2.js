@@ -51,6 +51,7 @@ describe("Authentication - 2 users", () => {
         res.body.status.should.equal(200);
         res.body.logged.should.equal(true);
         res.body.message.should.be.a("string");
+        console.log(res.body);
         user1t = res.body.token;
         user1id = res.body.id;
       })
@@ -60,12 +61,14 @@ describe("Authentication - 2 users", () => {
   it("sign in user2", done => {
     request(app)
       .post("/auth/login")
-      .send(user1)
+      .send(user2)
       .expect("Content-type", /json/)
       .expect(res => {
         res.body.status.should.equal(200);
         res.body.logged.should.equal(true);
         res.body.message.should.be.a("string");
+        console.log(res.body);
+
         user2t = res.body.token;
         user2id = res.body.id;
       })

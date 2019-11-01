@@ -24,7 +24,7 @@ interface RequestWithUser extends Request {
  */
 export function isAuthenticated(req: RequestWithUser, res: Response, next: NextFunction): void {
     const token: any = req.headers['x-access-token'];
-
+    //todo: check if token matches token stored in user.token
     if (token) {
         try {
             const user: object | string = jwt.verify(token, app.get('secret'));

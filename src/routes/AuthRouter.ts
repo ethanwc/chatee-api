@@ -15,7 +15,7 @@ const router: Router = Router();
  *    description: Sign up user for the application
  *    tags: ["auth"]
  *    requestBody:
- *      description: sign up body
+ *      description: Sign up body
  *      required: true
  *      content:
  *        application/json:

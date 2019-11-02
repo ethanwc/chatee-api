@@ -59,7 +59,7 @@ router.get("/:id", UserComponent.findOne);
  *              incomingFriendRequests: []
  *              outgoingFriendRequests: []
  *              email: example@mail.com
- *              profil: []
+ *              profile: []
  */
 
 router.delete("/", UserComponent.deleteUser);
@@ -78,6 +78,8 @@ router.delete("/", UserComponent.deleteUser);
  *      required: true
  *      content:
  *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/UserSchema'
  *          example:
  *            potentialFriend: jake@mail.com
  *    security:
@@ -94,7 +96,7 @@ router.delete("/", UserComponent.deleteUser);
  *              incomingFriendRequests: []
  *              outgoingFriendRequests: ["jake@mail.com"]
  *              email: example@mail.com
- *              profil: []
+ *              profile: []
  */
 router.post("/friendRequest", UserComponent.friendRequest);
 
@@ -112,6 +114,8 @@ router.post("/friendRequest", UserComponent.friendRequest);
  *      required: true
  *      content:
  *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/UserSchema'
  *          example:
  *            potentialFriend: example@mail.com
  *            accept: true
@@ -129,7 +133,7 @@ router.post("/friendRequest", UserComponent.friendRequest);
  *              incomingFriendRequests: []
  *              outgoingFriendRequests: []
  *              email: steve@mail.com
- *              profil: []
+ *              profile: []
  */
 router.post("/handleFriend", UserComponent.handleFriend);
 
@@ -147,6 +151,8 @@ router.post("/handleFriend", UserComponent.handleFriend);
  *      required: true
  *      content:
  *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/UserSchema'
  *          example:
  *            friend:  example@mail.com
  *    security:
@@ -163,7 +169,7 @@ router.post("/handleFriend", UserComponent.handleFriend);
  *              incomingFriendRequests: []
  *              outgoingFriendRequests: []
  *              email: steve@mail.com
- *              profil: []
+ *              profile: []
  */
 router.post("/removeFriend", UserComponent.removeFriend);
 
@@ -181,6 +187,8 @@ router.post("/removeFriend", UserComponent.removeFriend);
  *      required: true
  *      content:
  *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/UserSchema'
  *          example:
  *            profile:  ["profileData"]
  *    security:
@@ -197,7 +205,7 @@ router.post("/removeFriend", UserComponent.removeFriend);
  *              incomingFriendRequests: []
  *              outgoingFriendRequests: []
  *              email: steve@mail.com
- *              profil: ["new and exciting"]
+ *              profile: ["new and exciting"]
  */
 router.patch("/updateProfile", UserComponent.updateProfile);
 

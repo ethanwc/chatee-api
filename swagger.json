@@ -18,7 +18,7 @@
           "auth"
         ],
         "requestBody": {
-          "description": "sign up body",
+          "description": "Sign up body",
           "required": true,
           "content": {
             "application/json": {
@@ -111,6 +111,189 @@
         }
       }
     },
+    "/v1/chats": {
+      "post": {
+        "description": "Create a new chat",
+        "tags": [
+          "chats"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returned new chat",
+            "content": {
+              "application/json": {
+                "example": {
+                  "messages": [],
+                  "members": [
+                    "jake@mail.com"
+                  ],
+                  "membersTyping": [],
+                  "_id": "awlkjdaolkwdjawio9du90",
+                  "creator": "jake@mail.com",
+                  "createdDate": "2019-11-02T00:23:12.000Z"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/chats/": {
+      "delete": {
+        "description": "Delete chat",
+        "tags": [
+          "users"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returned new chat",
+            "content": {
+              "application/json": {
+                "example": {
+                  "messages": [],
+                  "members": [
+                    "jake@mail.com"
+                  ],
+                  "membersTyping": [],
+                  "_id": "awlkjdaolkwdjawio9du90",
+                  "creator": "jake@mail.com",
+                  "createdDate": "2019-11-02T00:23:12.000Z"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/chats/invite": {
+      "post": {
+        "description": "Invite a member to a chat",
+        "tags": [
+          "chats"
+        ],
+        "requestBody": {
+          "description": "Chat invite body",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatSchema"
+              },
+              "example": {
+                "newuser": "stevejobs@apple.com",
+                "chatid": "chatabcd"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User invited to chat"
+          }
+        }
+      }
+    },
+    "/v1/chats/handleInvite": {
+      "post": {
+        "description": "Handle response to chat invite",
+        "tags": [
+          "chats"
+        ],
+        "requestBody": {
+          "description": "Chat invite request body",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatSchema"
+              },
+              "example": {
+                "accept": true,
+                "chatid": "1234chatabcd"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returned updated user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserSchema"
+                },
+                "example": {
+                  "chats": [
+                    "1234chatabcd"
+                  ],
+                  "chatRequests": [],
+                  "friends": [],
+                  "incomingFriendRequests": [],
+                  "outgoingFriendRequests": [
+                    "jake@mail.com"
+                  ],
+                  "email": "example@mail.com",
+                  "profile": []
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/chats/remove": {
+      "post": {
+        "description": "Remove a member from a chat",
+        "tags": [
+          "chats"
+        ],
+        "requestBody": {
+          "description": "Chat remove body",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatSchema"
+              },
+              "example": {
+                "removeuser": "stevejobs@apple.com",
+                "chatid": "chatabcd"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User removed from chat"
+          }
+        }
+      }
+    },
     "/v1/users/{id}": {
       "get": {
         "description": "Get user by userId",
@@ -176,7 +359,7 @@
                   "incomingFriendRequests": [],
                   "outgoingFriendRequests": [],
                   "email": "example@mail.com",
-                  "profil": []
+                  "profile": []
                 }
               }
             }
@@ -195,6 +378,9 @@
           "required": true,
           "content": {
             "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserSchema"
+              },
               "example": {
                 "potentialFriend": "jake@mail.com"
               }
@@ -220,7 +406,7 @@
                     "jake@mail.com"
                   ],
                   "email": "example@mail.com",
-                  "profil": []
+                  "profile": []
                 }
               }
             }
@@ -239,6 +425,9 @@
           "required": true,
           "content": {
             "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserSchema"
+              },
               "example": {
                 "potentialFriend": "example@mail.com",
                 "accept": true
@@ -265,7 +454,7 @@
                   "incomingFriendRequests": [],
                   "outgoingFriendRequests": [],
                   "email": "steve@mail.com",
-                  "profil": []
+                  "profile": []
                 }
               }
             }
@@ -284,6 +473,9 @@
           "required": true,
           "content": {
             "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserSchema"
+              },
               "example": {
                 "friend": "example@mail.com"
               }
@@ -307,7 +499,7 @@
                   "incomingFriendRequests": [],
                   "outgoingFriendRequests": [],
                   "email": "steve@mail.com",
-                  "profil": []
+                  "profile": []
                 }
               }
             }
@@ -326,6 +518,9 @@
           "required": true,
           "content": {
             "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserSchema"
+              },
               "example": {
                 "profile": [
                   "profileData"
@@ -351,7 +546,7 @@
                   "incomingFriendRequests": [],
                   "outgoingFriendRequests": [],
                   "email": "steve@mail.com",
-                  "profil": [
+                  "profile": [
                     "new and exciting"
                   ]
                 }
@@ -364,6 +559,47 @@
   },
   "components": {
     "schemas": {
+      "ChatSchema": {
+        "required": [
+          "creator"
+        ],
+        "properties": {
+          "messages": {
+            "type": "array"
+          },
+          "members": {
+            "type": "array"
+          },
+          "lastMessage": {
+            "type": "string"
+          },
+          "membersTyping": {
+            "type": "array"
+          }
+        }
+      },
+      "UserSchema": {
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "profile": {
+            "type": "object"
+          },
+          "password": {
+            "type": "string"
+          },
+          "chats": {
+            "type": "array"
+          },
+          "friends": {
+            "type": "array"
+          }
+        }
+      },
       "Error": {
         "type": "object",
         "required": [

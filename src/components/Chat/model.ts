@@ -17,6 +17,25 @@ export interface IChatModel extends Document {
   lastMessageDate: Date;
 }
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    ChatSchema:
+ *      required:
+ *        - creator
+ *      properties:
+ *        messages:
+ *          type: array
+ *        members:
+ *          type: array
+ *        lastMessage:
+ *          type: string
+ *        membersTyping:
+ *          type: array     
+ *  
+ */
+
 const ChatSchema: Schema = new Schema(
   {
     messages: Array<String>(),

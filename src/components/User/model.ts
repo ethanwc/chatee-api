@@ -34,7 +34,26 @@ export interface IUserModel extends Document {
   gravatar: (size: number) => string;
 }
 
-
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    UserSchema:
+ *      required:
+ *        - email
+ *      properties:
+ *        email:
+ *          type: string
+ *        profile:
+ *          type: object
+ *        password:
+ *          type: string
+ *        chats:
+ *          type: array
+ *        friends:
+ *          type: array       
+ *  
+ */
 
 const UserSchema: Schema = new Schema(
   {

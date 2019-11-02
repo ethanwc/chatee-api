@@ -1,4 +1,5 @@
 import { IChatModel } from "./model";
+import { IUserModel } from "../User/model";
 
 /**
  * @export
@@ -14,45 +15,50 @@ export interface IChatService {
    */
   create(user: string): Promise<IChatModel>;
 
-//   /**
-//    * Deletes a chat.
-//    * @param {string} user
-//    * @param {string} chatid
-//    * @returns {Promise<IChatModel}
-//    * @memberof IChatService
-//    */
-//   delete(user: string, chatid: string): Promise<IChatModel>;
+  /**
+   * Deletes a chat.
+   * @param {string} user
+   * @param {string} chatid
+   * @returns {Promise<IChatModel}
+   * @memberof IChatService
+   */
+  deleteChat(user: string, chatid: string): Promise<IChatModel>;
 
-//   /**
-//    * Invites a user to a chat.
-//    * @param {string} user
-//    * @param {string} newuser
-//    * @param {string} chatid
-//    * @returns {Promise<IChatModel}
-//    * @memberof IChatService
-//    */
-//   invite(user: string, newuser: string, chatid: string): Promise<IChatModel>;
+  /**
+   * Invites a user to a chat.
+   * @param {string} user
+   * @param {string} newuser
+   * @param {string} chatid
+   * @returns {Promise<IUserModel>}
+   * @memberof IChatService
+   */
+  invite(user: string, newuser: string, chatid: string): Promise<IUserModel>;
 
-//   /**
-//    * Handles a user invite to a chat.
-//    * @param {string} user
-//    * @param {string} chatid
-//    * @param {boolean} accept
-//    * @returns {Promise<IChatModel}
-//    * @memberof IChatService
-//    */
-//   handleInvite(
-//     user: string,
-//     chatid: string,
-//     accept: boolean
-//   ): Promise<IChatModel>;
+  /**
+   * Handles a user invite to a chat.
+   * @param {string} user
+   * @param {string} chatid
+   * @param {boolean} accept
+   * @returns {Promise<IChatModel}
+   * @memberof IChatService
+   */
+  handleInvite(
+    user: string,
+    chatid: string,
+    accept: boolean
+  ): Promise<IUserModel>;
 
-//   /**
-//    * Removes a user from a chat.
-//    * @param {string} user
-//    * @param {string} chatid
-//    * @returns {Promise<IChatModel}
-//    * @memberof IChatService
-//    */
-//   remove(user: string, chatid: string): Promise<IChatModel>;
+  /**
+   * Removes a user from a chat.
+   * @param {string} user
+   * @param {string} removeUser
+   * @param {string} chatid
+   * @returns {Promise<IChatModel}
+   * @memberof IChatService
+   */
+  removeUser(
+    user: string,
+    removeuser: string,
+    chatid: string
+  ): Promise<IChatModel>;
 }

@@ -5,7 +5,7 @@ import * as swaggerUi from "swagger-ui-express";
 import AuthRouter from "./AuthRouter";
 import UserRouter from "./UserRouter";
 import ChatRouter from './ChatRouter';
-// import MessageRouter from './MessageRouter';
+import MessageRouter from './MessageRouter';
 let swaggerDoc: Object;
 
 try {
@@ -47,7 +47,7 @@ export function init(app: express.Application): void {
    *  Also, check if user authenticated
    * @constructs
    */
-  // app.use('/v1/messages', jwtConfig.isAuthenticated, MessageRouter);
+  app.use('/v1/messages', jwtConfig.isAuthenticated, MessageRouter);
 
   /**
    * @description Forwards any requests to the /auth URI to our AuthRouter

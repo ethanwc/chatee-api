@@ -40,7 +40,7 @@ router.post("/", ChatComponent.create);
  * /v1/chats/:
  *  delete:
  *    description: Delete chat
- *    tags: ["users"]
+ *    tags: ["chats"]
  *    security:
  *      - ApiKeyAuth: []
  *    responses:

@@ -8,7 +8,7 @@ const router: Router = Router();
 
 /**
  * POST method route
- * @example http://localhost:PORT/signup
+ * @example http://localhost:PORT/auth/signup
  * @swagger
  * /auth/signup/:
  *  post:

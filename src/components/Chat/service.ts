@@ -93,6 +93,8 @@ const ChatService: IChatService = {
 
       if (validate.error) throw new Error(validate.error.message);
 
+      //todo: pushy here, notify of invite
+
       //neccesary checks:
       //chat exists
       //member inviting is already in the chat
@@ -146,6 +148,8 @@ const ChatService: IChatService = {
       });
 
       if (validate.error) throw new Error(validate.error.message);
+
+      //todo: pushy here: user accepted invite?
 
       //neccesary checks:
       //chat exists

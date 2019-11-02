@@ -13,23 +13,45 @@ export interface IMessageModel extends Document {
   createdDate: Date;
   editDate: Date;
   //todo: reactions
-//   reactions: [];
+  //   reactions: [];
 }
 
- 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    MessageSchema:
+ *      required:
+ *        - author
+ *      properties:
+ *        type:
+ *          type: string
+ *        author:
+ *          type: string
+ *        message:
+ *          type: string
+ *        createdDate:
+ *          type: array
+ *        editDate:
+ *          type: string
+ */
+
 const MessageModel: Schema = new Schema(
   {
     type: String,
     author: String,
     message: String,
     createdDate: Date,
-    editDate: Date,
+    editDate: Date
     // reactions: []
-   },
+  },
   {
     collection: "MessageModel",
     versionKey: false
   }
 );
 
-export default connections.db.model<IMessageModel>("MessageModel", MessageModel);
+export default connections.db.model<IMessageModel>(
+  "MessageModel",
+  MessageModel
+);

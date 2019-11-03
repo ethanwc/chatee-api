@@ -6,6 +6,10 @@
 
 This API supports the react native application chatee.
 
+### Documentation
+
+View the API documentation [here](https://chatee-api.azurewebsites.net/docs/).
+
 ### Features
 
 ##### Authentication:
@@ -87,11 +91,3 @@ To use this generator as OAuth2.0 server you should implement client side, that 
 npm install -g swagger-jsdoc
 swagger-jsdoc -d swaggerDef.js -o swagger.json
 ```
-
-Swagger documentation will be available on route:
-
-```bash
-http://localhost:3000/docs
-```
-
-![Alt Text](https://i.ibb.co/b6SdyQV/gif1.gif)

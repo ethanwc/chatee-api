@@ -1,7 +1,5 @@
 # Chatee API built with express and typescript.
 
-> Node.js Express API with TypeScript 3. Supports MongoDB
-
 ## Description
 
 This API supports the react native application chatee.

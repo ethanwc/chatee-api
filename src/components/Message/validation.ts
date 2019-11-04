@@ -35,7 +35,6 @@ class MessageValidation extends Validation {
       user: Joi.string()
         .email()
         .required(),
-      //todo: robust message check
       message: Joi.required(),
       chatid: Joi.string().required()
     });
@@ -61,7 +60,6 @@ class MessageValidation extends Validation {
       user: Joi.string()
         .email()
         .required(),
-      //todo: robust message check
       message: Joi.required(),
       messageid: Joi.string().required()
     });

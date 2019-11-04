@@ -31,7 +31,6 @@ export interface IUserModel extends Document {
     picture: string;
   };
   comparePassword: (password: string) => Promise<boolean>;
-  gravatar: (size: number) => string;
 }
 
 /**
@@ -51,8 +50,8 @@ export interface IUserModel extends Document {
  *        chats:
  *          type: array
  *        friends:
- *          type: array       
- *  
+ *          type: array
+ *
  */
 
 const UserSchema: Schema = new Schema(
@@ -77,7 +76,7 @@ const UserSchema: Schema = new Schema(
       name: String,
       location: String,
       about: String,
-      picture: String,
+      picture: String
     }
   },
   {
@@ -119,25 +118,6 @@ UserSchema.methods.comparePassword = async function(
   } catch (error) {
     return error;
   }
-};
-
-/**
- * Helper method for getting user's gravatar.
- */
-//todo: delete me
-UserSchema.methods.gravatar = function(size: number): string {
-  if (!size) {
-    size = 200;
-  }
-  if (!this.email) {
-    return `https://gravatar.com/avatar/?s=${size}&d=retro`;
-  }
-  const md5: string = crypto
-    .createHash("md5")
-    .update(this.email)
-    .digest("hex");
-
-  return `https://gravatar.com/avatar/${md5}?s=${size}&d=retro`;
 };
 
 export default connections.db.model<IUserModel>("UserModel", UserSchema);

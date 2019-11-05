@@ -54,10 +54,14 @@ const MessageService: IMessageService = {
         if (chat.members.includes(user)) {
           //add new message if conditions are met
           const savedMessage: IMessageModel = await newMessage.save();
-          //todo: set last message info in chat
 
+          //sets last message id and date
           ChatModel.findByIdAndUpdate(chatid, {
-            $push: { messages: newMessage._id }
+            $push: { messages: newMessage._id },
+            $set: {
+              lastMessage: newMessage._id,
+              lastMessageDate: newMessage.createdDate
+            }
           });
 
           return savedMessage;
@@ -109,7 +113,6 @@ const MessageService: IMessageService = {
         });
         if (message.author === user) {
           await MessageModel.findByIdAndUpdate(messageid, newMessage);
-          //todo: update chat's most recent message
           return await MessageModel.findById(messageid);
         } else throw new Error("Only author can edit message.");
       } else throw new Error("Failed to find message.");

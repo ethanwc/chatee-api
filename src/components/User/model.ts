@@ -1,8 +1,8 @@
-import * as bcrypt from "bcrypt";
 import * as connections from "../../config/connection/connection";
-import * as crypto from "crypto";
 import { Document, Schema } from "mongoose";
 import { NextFunction } from "express";
+
+var bcrypt = require("bcryptjs");
 
 /**
  * @export
@@ -12,6 +12,7 @@ import { NextFunction } from "express";
 export interface IUserModel extends Document {
   id: string;
   email: string;
+  name: string;
   password: string;
   chats: string[];
   chatRequests: string[];
@@ -25,7 +26,6 @@ export interface IUserModel extends Document {
   network: IUserModel[];
 
   profile: {
-    name: string;
     location: string;
     about: string;
     picture: string;

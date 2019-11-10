@@ -6,6 +6,14 @@ import { IUserModel } from "./model";
  */
 export interface IUserService {
   /**
+   * Returns a list of all users.
+   * @param {string} user
+   * @returns {Promise<IUserModel[]>}
+   * @memberof IUserService
+   */
+  findAll(user: string): Promise<IUserModel[]>;
+
+  /**
    * Returns a user based on id.
    * @param {string} user
    * @returns {Promise<IUserModel>}
@@ -60,8 +68,5 @@ export interface IUserService {
    * @returns {Promise<IUserModel>}
    * @memberof IUserService
    */
-  updateProfile(
-    user: string,
-    profile: JSON
-  ): Promise<IUserModel>;
+  updateProfile(user: string, profile: JSON): Promise<IUserModel>;
 }

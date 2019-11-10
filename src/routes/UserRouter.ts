@@ -6,12 +6,34 @@ import { UserComponent } from "../components";
  */
 const router: Router = Router();
 
+ 
 /**
  * GET method route
- * @example http://localhost:PORT/v1/users/:id
+ * @example http://localhost:PORT/v1/users/all
  *
  * @swagger
- * /v1/users/{id}:
+ * /v1/users/all:
+ *  get:
+ *    description: Get all users
+ *    tags: ["users"]
+ *    security:
+ *      - ApiKeyAuth: []
+ *    responses:
+ *      200:
+ *        description: Returned users
+ *        content:
+ *          application/json:
+ *            example:
+ *              users: []
+ */
+router.get("/all", UserComponent.findAll);
+
+/**
+ * GET method route
+ * @example http://localhost:PORT/v1/users
+ *
+ * @swagger
+ * /v1/users:
  *  get:
  *    description: Get user by userId
  *    tags: ["users"]
@@ -34,7 +56,7 @@ const router: Router = Router();
  *              email: jake123@mail.com
  *              profile: [profileData]
  */
-router.get("/:id", UserComponent.findOne);
+router.get("/", UserComponent.findOne);
 
 /**
  * DELETE method route

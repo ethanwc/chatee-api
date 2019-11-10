@@ -11,26 +11,30 @@ import { Types } from "mongoose";
 const UserService: IUserService = {
   /**
    * @param {string} user
+   * @returns {Promise < IUserModel >[]}
+   * @memberof UserService
+   */
+  async findAll(user: string): Promise<IUserModel[]> {
+    try {
+      //return all users
+      //filter most information for security, semi-public route
+      return await UserModel.find().select("-password -_id");
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+  /**
+   * @param {string} user
    * @returns {Promise < IUserModel >}
    * @memberof UserService
    */
   async findOne(user: string): Promise<IUserModel> {
     try {
-      const validate: Joi.ValidationResult<{
-        user: string;
-      }> = UserValidation.user({
-        user
-      });
-
-      if (validate.error) throw new Error(validate.error.message);
       //return the requested user
       //filter most information for security, semi-public route
-      else
-        return await UserModel.findOne({
-          email: user
-        }).select(
-          "-password -_id -chats -chatRequests -incomingFriendRequests -outgoingFriendRequests"
-        );
+      return await UserModel.findOne({
+        email: user
+      }).select("-password -_id");
     } catch (error) {
       throw new Error(error.message);
     }

@@ -422,7 +422,7 @@
         }
       }
     },
-    "/v1/users/{id}": {
+    "/v1/users": {
       "get": {
         "description": "Get user by userId",
         "tags": [

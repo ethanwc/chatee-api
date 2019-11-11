@@ -11,6 +11,30 @@ import { IUserModel } from "../User/model";
  * @param {NextFunction} next
  * @returns {Promise < void >}
  */
+export async function getOne(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const chat: IChatModel = await ChatService.getChat(
+      req.body.user.email,
+      req.params.chatid
+    );
+
+    res.status(200).json(chat);
+  } catch (error) {
+    next(new HttpError(error.message.status, error.message));
+  }
+}
+
+/**
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ * @returns {Promise < void >}
+ */
 export async function create(
   req: Request,
   res: Response,
@@ -67,7 +91,6 @@ export async function invite(
       req.body.newuser,
       req.body.chatid
     );
-
 
     res.status(200).json({});
   } catch (error) {

@@ -3,12 +3,49 @@ import UserModel, { IUserModel } from "../User/model";
 import ChatModel, { IChatModel } from "./model";
 import ChatValidation from "./validation";
 import { IChatService } from "./interface";
+import MessageModel, { IMessageModel } from "../Message/model";
 
 /**
  * @export
  * @implements {IChatModelService}
  */
 const ChatService: IChatService = {
+  /**
+   * @param {string} user
+   * @param {string} chatid
+   * @returns {Promise < IChatModel >}
+   * @memberof ChatService
+   */
+  async getChat(user: string, chatid: string): Promise<IChatModel> {
+    try {
+      const validate: Joi.ValidationResult<{
+        user: string;
+        chatid: string;
+      }> = ChatValidation.chat({
+        user,
+        chatid
+      });
+
+      if (validate.error) throw new Error(validate.error.message);
+
+      //find chat by id, if user is member, return chat info
+
+      let chat: IChatModel = await ChatModel.findById(chatid);
+
+      if (chat) {
+        if (chat.members.includes(user)) {
+          let fullMessages: IMessageModel[] = await MessageModel.find({
+            _id: { $in: chat.messages }
+          });
+          chat.fullMessages = fullMessages;
+
+          return chat;
+        } else throw new Error("User is not a member of the chat");
+      } else throw new Error("Chat does not exist");
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
   /**
    * @param {string} user
    * @returns {Promise < IChatModel >}

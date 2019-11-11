@@ -5,6 +5,35 @@ import { ChatComponent } from "../components";
  * @constant {express.Router}
  */
 const router: Router = Router();
+
+
+/**
+ * GET method route
+ * @example http://localhost:PORT/v1/chats/:chatid
+ *
+ * @swagger
+ * /v1/chats/:chatid:
+ *  get:
+ *    description: Get chat info
+ *    tags: ["chats"]
+ *    security:
+ *      - ApiKeyAuth: []
+ *    responses:
+ *      200:
+ *        description: Returned chat info
+ *        content:
+ *          application/json:
+ *            example:
+ *              messages: []
+ *              completeMessages: []
+ *              members: []
+ *              membersTyping: []
+ *              creator: "ethan"
+ *              createdDate: "1-2-3"
+ */
+router.get("/:chatid", ChatComponent.getOne);
+
+
 /**
  * POST method route
  * @example  http://localhost:PORT/v1/chats

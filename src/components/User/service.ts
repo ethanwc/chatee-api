@@ -223,12 +223,12 @@ const UserService: IUserService = {
         //friend removes user from friends
         await UserModel.findOneAndUpdate(
           { email: potentialFriend },
-          { $pull: { incomingFriendRequests: user } }
+          { $pull: { friends: user } }
         );
         //user removes friend from friends
         await UserModel.findOneAndUpdate(
           { email: user },
-          { $pull: { outgoingFriendRequests: potentialFriend } }
+          { $pull: { friends: potentialFriend } }
         );
 
         //todo: pushy to notify of friend removal... best feature ever

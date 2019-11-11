@@ -9,6 +9,7 @@ import { IMessageModel } from "../Message/model";
  */
 export interface IChatModel extends Document {
   messages: Array<string>;
+  fullMessages: Array<IMessageModel>;
   members: Array<string>;
   membersTyping: Array<string>;
   creator: String;
@@ -32,8 +33,8 @@ export interface IChatModel extends Document {
  *        lastMessage:
  *          type: string
  *        membersTyping:
- *          type: array     
- *  
+ *          type: array
+ *
  */
 
 const ChatSchema: Schema = new Schema(
@@ -41,6 +42,7 @@ const ChatSchema: Schema = new Schema(
     messages: Array<String>(),
     members: Array<String>(),
     membersTyping: Array<String>(),
+    fullMessages: Array<IMessageModel>(),
     creator: String,
     createdDate: Date,
     lastMessage: String,

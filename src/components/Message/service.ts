@@ -55,16 +55,18 @@ const MessageService: IMessageService = {
           //add new message if conditions are met
           const savedMessage: IMessageModel = await newMessage.save();
 
-          //sets last message id and date
-          ChatModel.findByIdAndUpdate(chatid, {
-            $push: { messages: newMessage._id },
-            $set: {
-              lastMessage: newMessage._id,
-              lastMessageDate: newMessage.createdDate
-            }
-          });
+          if (savedMessage) {
+            //sets last message id and date
+            await ChatModel.findByIdAndUpdate(chatid, {
+              $push: { messages: newMessage._id },
+              $set: {
+                lastMessage: newMessage._id,
+                lastMessageDate: newMessage.createdDate
+              }
+            });
 
-          return savedMessage;
+            return savedMessage;
+          } else throw new Error("Failed to save message.");
         } else throw new Error("User is not a member of the chat");
       } else throw new Error("Chat not found");
     } catch (error) {

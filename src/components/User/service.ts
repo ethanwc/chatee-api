@@ -49,11 +49,11 @@ const UserService: IUserService = {
       if (res) {
         if (user === userid)
           return await UserModel.findOne({
-            email: user
+            email: userid
           }).select("-password -_id");
         else
           return await UserModel.findOne({
-            email: user
+            email: userid
           }).select(
             "-password -_id -chats -chatRequests -incomingFriendRequests -outgoingFriendRequests"
           );

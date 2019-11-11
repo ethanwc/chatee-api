@@ -154,12 +154,12 @@ const UserService: IUserService = {
         //friend removes user from outgoing requests
         await UserModel.findOneAndUpdate(
           { email: potentialFriend },
-          { $pull: { incomingFriendRequests: user } }
+          { $pull: { outgoingFriendRequests: user } }
         );
         //user removes friend from incoming requests
         await UserModel.findOneAndUpdate(
           { email: user },
-          { $pull: { outgoingFriendRequests: potentialFriend } }
+          { $pull: { incomingFriendRequests: potentialFriend } }
         );
 
         //accept

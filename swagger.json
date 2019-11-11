@@ -27,7 +27,8 @@
               },
               "example": {
                 "email": "test.user@mail.com",
-                "password": "test_test"
+                "password": "test_test",
+                "name": "steve jobs"
               }
             }
           }
@@ -415,6 +416,31 @@
                   "message": "asdf hi",
                   "createdDate": "2019-11-02T02:22:25.000Z",
                   "editDate": "2019-11-02T02:22:25.000Z"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/users/all": {
+      "get": {
+        "description": "Get all users",
+        "tags": [
+          "users"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returned users",
+            "content": {
+              "application/json": {
+                "example": {
+                  "users": []
                 }
               }
             }

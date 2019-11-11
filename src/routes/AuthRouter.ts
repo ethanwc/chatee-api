@@ -24,6 +24,7 @@ const router: Router = Router();
  *          example:
  *            email: test.user@mail.com
  *            password: test_test
+ *            name: steve jobs
  *    responses:
  *      200:
  *        description: User has been signed up

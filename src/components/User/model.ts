@@ -61,6 +61,7 @@ const UserSchema: Schema = new Schema(
       unique: true,
       trim: true
     },
+    name: String,
     password: String,
     chats: Array(),
     chatRequests: Array(),

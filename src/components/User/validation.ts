@@ -17,7 +17,7 @@ class UserValidation extends Validation {
   }
 
   /**
-   * @param {{ user: string }} body
+   * @param {{ user: string;}} body
    * @returns {Joi.ValidationResult<{ user: string }>}
    * @memberof UserValidation
    */
@@ -35,6 +35,24 @@ class UserValidation extends Validation {
     return Joi.validate(body, schema);
   }
 
+  /**
+   * @param {{ userid: string;}} body
+   * @returns {Joi.ValidationResult<{ user: string }>}
+   * @memberof UserValidation
+   */
+  userid(body: {
+    userid: string;
+  }): Joi.ValidationResult<{
+    userid: string;
+  }> {
+    const schema: Joi.Schema = Joi.object().keys({
+      userid: Joi.string()
+        .email()
+        .required()
+    });
+
+    return Joi.validate(body, schema);
+  }
   /**
    * @param {{ user: string; potentialFriend: string }} body
    * @returns {Joi.ValidationResult<{ user: string }>}

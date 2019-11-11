@@ -25,16 +25,39 @@ const UserService: IUserService = {
   },
   /**
    * @param {string} user
+   * @param {string} userid
    * @returns {Promise < IUserModel >}
    * @memberof UserService
    */
-  async findOne(user: string): Promise<IUserModel> {
+  async findOne(user: string, userid: string): Promise<IUserModel> {
     try {
       //return the requested user
       //filter most information for security, semi-public route
-      return await UserModel.findOne({
-        email: user
-      }).select("-password -_id");
+
+      const validate: Joi.ValidationResult<{
+        userid: string;
+      }> = UserValidation.userid({
+        userid
+      });
+
+      if (validate.error) throw new Error(validate.error.message);
+
+      let res: IUserModel = await UserModel.findOne({
+        email: userid
+      });
+
+      if (res) {
+        if (user === userid)
+          return await UserModel.findOne({
+            email: user
+          }).select("-password -_id");
+        else
+          return await UserModel.findOne({
+            email: user
+          }).select(
+            "-password -_id -chats -chatRequests -incomingFriendRequests -outgoingFriendRequests"
+          );
+      } else throw new Error("User does not exist");
     } catch (error) {
       throw new Error(error.message);
     }

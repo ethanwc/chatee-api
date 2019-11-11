@@ -30,19 +30,19 @@ router.get("/all", UserComponent.findAll);
 
 /**
  * GET method route
- * @example http://localhost:PORT/v1/users
+ * @example http://localhost:PORT/v1/users/:userid
  *
  * @swagger
- * /v1/users:
+ * /v1/users/:userid:
  *  get:
- *    description: Get user by userId
+ *    description: Get user by userid
  *    tags: ["users"]
  *    security:
  *      - ApiKeyAuth: []
  *    parameters:
  *      - in: path
- *        name: id
- *        description: the unique userId
+ *        name: userid
+ *        description: the unique userid
  *        required: true
  *        schema:
  *          type: string
@@ -56,7 +56,7 @@ router.get("/all", UserComponent.findAll);
  *              email: jake123@mail.com
  *              profile: [profileData]
  */
-router.get("/", UserComponent.findOne);
+router.get("/:userid", UserComponent.findOne);
 
 /**
  * DELETE method route

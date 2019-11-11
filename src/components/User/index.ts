@@ -38,7 +38,7 @@ export async function findOne(
   next: NextFunction
 ): Promise<void> {
   try {
-    const user: IUserModel = await UserService.findOne(req.body.user.email);
+    const user: IUserModel = await UserService.findOne(req.body.user.email, req.params.userid);
 
     res.status(200).json(user);
   } catch (error) {

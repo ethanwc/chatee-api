@@ -19,7 +19,7 @@ export interface IUserService {
    * @returns {Promise<IUserModel>}
    * @memberof IUserService
    */
-  findOne(user: string): Promise<IUserModel>;
+  findOne(user: string, userid: string): Promise<IUserModel>;
 
   /**
    * Deletes a user based on id.

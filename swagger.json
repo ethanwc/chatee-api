@@ -478,9 +478,9 @@
         }
       }
     },
-    "/v1/users": {
+    "/v1/users/:userid": {
       "get": {
-        "description": "Get user by userId",
+        "description": "Get user by userid",
         "tags": [
           "users"
         ],
@@ -492,8 +492,8 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id",
-            "description": "the unique userId",
+            "name": "userid",
+            "description": "the unique userid",
             "required": true,
             "schema": {
               "type": "string"

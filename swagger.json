@@ -112,9 +112,9 @@
         }
       }
     },
-    "/v1/chats/:chatid": {
+    "/v1/chats/all": {
       "get": {
-        "description": "Get chat info",
+        "description": "Get chat info for all chats user is in",
         "tags": [
           "chats"
         ],
@@ -126,6 +126,35 @@
         "responses": {
           "200": {
             "description": "Returned chat info",
+            "content": {
+              "application/json": {
+                "example": {
+                  "messages": [],
+                  "members": [],
+                  "membersTyping": [],
+                  "creator": "ethan",
+                  "createdDate": "1-2-3"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/chats/:chatid": {
+      "get": {
+        "description": "Get full chat messages and info",
+        "tags": [
+          "chats"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returned chat info and messages",
             "content": {
               "application/json": {
                 "example": {

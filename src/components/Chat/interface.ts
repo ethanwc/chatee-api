@@ -8,7 +8,16 @@ import { IUserModel } from "../User/model";
 
 export interface IChatService {
   /**
-   * Get a chat chat.
+   * Get a chat's info.
+   * @param {string} user
+   * @param {string} chatid
+   * @returns {Promise<IChatModel[]>}
+   * @memberof IChatService
+   */
+  getAllChatsInfo(user: string): Promise<IChatModel[]>;
+
+  /**
+   * Get a complete chat.
    * @param {string} user
    * @param {string} chatid
    * @returns {Promise<IChatModel}

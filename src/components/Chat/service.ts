@@ -12,10 +12,32 @@ import MessageModel, { IMessageModel } from "../Message/model";
 const ChatService: IChatService = {
   /**
    * @param {string} user
-   * @param {string} chatid
    * @returns {Promise < IChatModel >}
    * @memberof ChatService
    */
+
+  async getAllChatsInfo(user: string): Promise<IChatModel[]> {
+    try {
+      const validate: Joi.ValidationResult<{
+        user: string;
+      }> = ChatValidation.chatInfo({
+        user
+      });
+
+      if (validate.error) throw new Error(validate.error.message);
+
+      let founduser: IUserModel = await UserModel.findOne({ email: user });
+
+      let chats: IChatModel[] = await ChatModel.find({
+        _id: { $in: founduser.chats }
+      });
+
+      return chats;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
   async getChat(user: string, chatid: string): Promise<IChatModel> {
     try {
       const validate: Joi.ValidationResult<{

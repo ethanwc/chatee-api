@@ -11,6 +11,29 @@ import { IUserModel } from "../User/model";
  * @param {NextFunction} next
  * @returns {Promise < void >}
  */
+export async function getInfo(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const chats: IChatModel[] = await ChatService.getAllChatsInfo(
+      req.body.user.email,
+    );
+
+    res.status(200).json(chats);
+  } catch (error) {
+    next(new HttpError(error.message.status, error.message));
+  }
+}
+
+/**
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ * @returns {Promise < void >}
+ */
 export async function getOne(
   req: Request,
   res: Response,

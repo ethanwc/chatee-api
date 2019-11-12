@@ -6,6 +6,31 @@ import { ChatComponent } from "../components";
  */
 const router: Router = Router();
 
+/**
+ * GET method route
+ * @example http://localhost:PORT/v1/chats/all
+ *
+ * @swagger
+ * /v1/chats/all:
+ *  get:
+ *    description: Get chat info for all chats user is in
+ *    tags: ["chats"]
+ *    security:
+ *      - ApiKeyAuth: []
+ *    responses:
+ *      200:
+ *        description: Returned chat info
+ *        content:
+ *          application/json:
+ *            example:
+ *              messages: []
+ *              members: []
+ *              membersTyping: []
+ *              creator: "ethan"
+ *              createdDate: "1-2-3"
+ */
+router.get("/all", ChatComponent.getInfo);
+
 
 /**
  * GET method route
@@ -14,13 +39,13 @@ const router: Router = Router();
  * @swagger
  * /v1/chats/:chatid:
  *  get:
- *    description: Get chat info
+ *    description: Get full chat messages and info
  *    tags: ["chats"]
  *    security:
  *      - ApiKeyAuth: []
  *    responses:
  *      200:
- *        description: Returned chat info
+ *        description: Returned chat info and messages
  *        content:
  *          application/json:
  *            example:

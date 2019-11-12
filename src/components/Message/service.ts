@@ -60,7 +60,7 @@ const MessageService: IMessageService = {
             await ChatModel.findByIdAndUpdate(chatid, {
               $push: { messages: newMessage._id },
               $set: {
-                lastMessage: newMessage._id,
+                lastMessage: newMessage.message,
                 lastMessageDate: newMessage.createdDate
               }
             });

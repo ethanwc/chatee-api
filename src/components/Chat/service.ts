@@ -292,7 +292,7 @@ const ChatService: IChatService = {
               });
               //remove chat from chats in user
               await UserModel.findByIdAndUpdate(
-                { email: removeuser },
+                { email: removeUser },
                 { $pull: { chats: chatid } }
               );
 

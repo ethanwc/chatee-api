@@ -28,8 +28,10 @@ const ChatService: IChatService = {
 
       let founduser: IUserModel = await UserModel.findOne({ email: user });
 
+      //get invites also to display information about them
+
       let chats: IChatModel[] = await ChatModel.find({
-        _id: { $in: founduser.chats }
+        _id: { $in: [...founduser.chats, ...founduser.chatRequests] }
       });
 
       return chats;

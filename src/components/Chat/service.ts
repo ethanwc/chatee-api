@@ -220,15 +220,18 @@ const ChatService: IChatService = {
 
       if (chat) {
         if (invitedUser.chatRequests.includes(chatid)) {
-          //add user to list of chat's members
-          await ChatModel.findByIdAndUpdate(chatid, {
-            $addToSet: { members: user }
-          });
-          //add chat to user's chats
-          await UserModel.findOneAndUpdate(
-            { email: user },
-            { $addToSet: { chats: chatid } }
-          );
+          if (accept) {
+            //add user to list of chat's members
+            await ChatModel.findByIdAndUpdate(chatid, {
+              $addToSet: { members: user }
+            });
+            //add chat to user's chats
+            await UserModel.findOneAndUpdate(
+              { email: user },
+              { $addToSet: { chats: chatid } }
+            );
+          }
+
           //remove chat from users chat requests
           await UserModel.findOneAndUpdate(
             { email: user },
@@ -293,7 +296,7 @@ const ChatService: IChatService = {
                 $pull: { members: removeUser }
               });
               //remove chat from chats in user
-              await UserModel.findByIdAndUpdate(
+              await UserModel.findOneAndUpdate(
                 { email: removeUser },
                 { $pull: { chats: chatid } }
               );

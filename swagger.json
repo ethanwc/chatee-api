@@ -768,6 +768,24 @@
           }
         }
       }
+    },
+    "/v1/users/device/:id": {
+      "get": {
+        "description": "Register a device",
+        "tags": [
+          "users"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Device registered"
+          }
+        }
+      }
     }
   },
   "components": {

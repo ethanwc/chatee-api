@@ -69,4 +69,13 @@ export interface IUserService {
    * @memberof IUserService
    */
   updateProfile(user: string, profile: JSON): Promise<IUserModel>;
+
+  /**
+   * Register a device for push notifications.
+   * @param {string} user
+   * @param {string} device
+   * @returns {Promise<IUserModel>}
+   * @memberof IUserService
+   */
+  device(user: string, device: string): Promise<IUserModel>;
 }

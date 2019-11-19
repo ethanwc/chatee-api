@@ -103,6 +103,28 @@ class UserValidation extends Validation {
 
     return Joi.validate(body, schema);
   }
+
+  /**
+   * @param {{ user: string; device: string; }} body
+   * @returns {Joi.ValidationResult<{ user: string }>}
+   * @memberof UserValidation
+   */
+  device(body: {
+    user: string;
+    device: string;
+  }): Joi.ValidationResult<{
+    user: string;
+    device: string;
+  }> {
+    const schema: Joi.Schema = Joi.object().keys({
+      user: Joi.string()
+        .email()
+        .required(),
+      device: Joi.string().required()
+    });
+
+    return Joi.validate(body, schema);
+  }
 }
 
 export default new UserValidation();

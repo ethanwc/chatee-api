@@ -24,7 +24,6 @@ export async function findAll(
   }
 }
 
-
 /**
  * @export
  * @param {Request} req
@@ -38,7 +37,10 @@ export async function findOne(
   next: NextFunction
 ): Promise<void> {
   try {
-    const user: IUserModel = await UserService.findOne(req.body.user.email, req.params.userid);
+    const user: IUserModel = await UserService.findOne(
+      req.body.user.email,
+      req.params.userid
+    );
 
     res.status(200).json(user);
   } catch (error) {
@@ -159,6 +161,29 @@ export async function updateProfile(
     );
 
     res.status(200).json(user);
+  } catch (error) {
+    next(new HttpError(error.message.status, error.message));
+  }
+}
+
+/**
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ * @returns {Promise < void >}
+ */
+export async function device(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  try {
+    const user: IUserModel = await UserService.device(
+      req.body.user.email,
+      req.params.device
+    );
+    res.status(200).json({});
   } catch (error) {
     next(new HttpError(error.message.status, error.message));
   }

@@ -298,6 +298,33 @@ const UserService: IUserService = {
     } catch (error) {
       throw new Error(error.message);
     }
+  },
+
+  /**
+   * @param {string} user
+   * @param {string} device
+   * @returns {Promise < IUserModel >}
+   * @memberof UserService
+   */
+  async device(user: string, device: string): Promise<IUserModel> {
+    try {
+      const validate: Joi.ValidationResult<{
+        user: string;
+        device: string;
+      }> = UserValidation.device({
+        user,
+        device
+      });
+
+      if (validate.error) throw new Error(validate.error.message);
+
+      return await UserModel.findOneAndUpdate(
+        { email: user },
+        { $set: { token: device } }
+      );
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 };
 

@@ -231,6 +231,24 @@ router.post("/removeFriend", UserComponent.removeFriend);
  */
 router.patch("/updateProfile", UserComponent.updateProfile);
 
+
+/**
+ * GET method route
+ * @example http://localhost:PORT/v1/users/device/:id
+ *
+ * @swagger
+ * /v1/users/device/:id:
+ *  get:
+ *    description: Register a device
+ *    tags: ["users"]
+ *    security:
+ *      - ApiKeyAuth: []
+ *    responses:
+ *      200:
+ *        description: Device registered
+ */
+router.get("/device/:device", UserComponent.device);
+
 /**
  * @export {express.Router}
  */

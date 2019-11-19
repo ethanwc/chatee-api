@@ -1,51 +1,55 @@
-import * as dotenv from 'dotenv';
+import * as dotenv from "dotenv";
 
 dotenv.config();
 
 interface IConfig {
-    port: string | number;
-    database: {
-        MONGODB_URI: string;
-        MONGODB_DB_MAIN: string;
-    };
-    secret: string;
+  port: string | number;
+  database: {
+    MONGODB_URI: string;
+    MONGODB_DB_MAIN: string;
+  };
+  secret: string;
+  pushy_key: string;
 }
 
-const NODE_ENV: string = process.env.NODE_ENV || 'development';
+const NODE_ENV: string = process.env.NODE_ENV || "development";
 
 const development: IConfig = {
-    port: process.env.PORT || 3000,
-    database: {
-        MONGODB_URI: process.env.MONGODB_URI || 'mongodb://localhost:27017/',
-        MONGODB_DB_MAIN: process.env.MONGODB_DB_MAIN || 'users_db'
-    },
-    secret: process.env.SECRET || '@QEGTUI'
+  port: process.env.PORT || 3000,
+  database: {
+    MONGODB_URI: process.env.MONGODB_URI || "mongodb://localhost:27017/",
+    MONGODB_DB_MAIN: process.env.MONGODB_DB_MAIN || "users_db"
+  },
+  secret: process.env.SECRET || "@QEGTUI",
+  pushy_key: process.env.PUSHY_KEY
 };
 
 const production: IConfig = {
-    port: process.env.PORT || 3000,
-    database: {
-        MONGODB_URI: process.env.MONGODB_URI || 'mongodb://production_uri/',
-        MONGODB_DB_MAIN: process.env.MONGODB_DB_MAIN || 'users_db'
-    },
-    secret: process.env.SECRET || '@QEGTUI'
+  port: process.env.PORT || 3000,
+  database: {
+    MONGODB_URI: process.env.MONGODB_URI || "mongodb://production_uri/",
+    MONGODB_DB_MAIN: process.env.MONGODB_DB_MAIN || "users_db"
+  },
+  secret: process.env.SECRET || "@QEGTUI",
+  pushy_key: process.env.PUSHY_KEY
 };
 
 const test: IConfig = {
-    port: process.env.PORT || 3000,
-    database: {
-        MONGODB_URI: process.env.MONGODB_URI || 'mongodb://localhost:27017',
-        MONGODB_DB_MAIN: 'test_users_db'
-    },
-    secret: process.env.SECRET || '@QEGTUI'
+  port: process.env.PORT || 3000,
+  database: {
+    MONGODB_URI: process.env.MONGODB_URI || "mongodb://localhost:27017",
+    MONGODB_DB_MAIN: "test_users_db"
+  },
+  secret: process.env.SECRET || "@QEGTUI",
+  pushy_key: process.env.PUSHY_KEY
 };
 
 const config: {
-    [name: string]: IConfig
+  [name: string]: IConfig;
 } = {
-    test,
-    development,
-    production
+  test,
+  development,
+  production
 };
 
 export default config[NODE_ENV];

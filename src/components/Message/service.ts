@@ -3,6 +3,10 @@ import ChatModel, { IChatModel } from "../Chat/model";
 import MessageModel, { IMessageModel } from "./model";
 import MessageValidation from "./validation";
 import { IMessageService } from "./interface";
+import config from "../../config/env/index";
+
+var Pushy = require("pushy");
+var pushyAPI = new Pushy(config.pushy_key);
 
 /**
  * @export
@@ -38,8 +42,6 @@ const MessageService: IMessageService = {
       //make sure chat exists
       //make sure user is member of chat
 
-      //todo: pushy here notify of new chat msg.
-
       const newMessage: IMessageModel = new MessageModel({
         author: user,
         type: message.type,
@@ -57,13 +59,55 @@ const MessageService: IMessageService = {
 
           if (savedMessage) {
             //sets last message id and date
-            await ChatModel.findByIdAndUpdate(chatid, {
+            let updateChat = await ChatModel.findByIdAndUpdate(chatid, {
               $push: { messages: newMessage._id },
               $set: {
                 lastMessage: newMessage.message,
                 lastMessageDate: newMessage.createdDate
               }
             });
+
+            if (updateChat) {
+              //dont send notification to message author...
+              let targets: string[] = chat.members.filter(
+                (member: any) => member.email !== user
+              );
+
+              // Set push payload data to deliver to device(s)
+              let message =
+                newMessage.type === "image" ? "Image" : newMessage.message;
+
+              var data = {
+                message: `${user}: ${message}`
+              };
+
+              // Insert target device token(s) here
+              var to = [...targets];
+
+              // Set optional push notification options (such as iOS notification fields)
+              var options = {
+                notification: {
+                  badge: 1,
+                  sound: "ping.aiff",
+                  body: "Hello World \u270c"
+                }
+              };
+
+              // Send push notification via the Send Notifications API
+              // https://pushy.me/docs/api/send-notifications
+              pushyAPI.sendPushNotification(data, to, options, function(
+                err: any,
+                id: string
+              ) {
+                // Log errors to console
+                if (err) {
+                  return console.log("Fatal Error", err);
+                }
+
+                // Log success
+                console.log("Push sent successfully! (ID: " + id + ")");
+              });
+            }
 
             return savedMessage;
           } else throw new Error("Failed to save message.");

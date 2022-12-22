@@ -42,7 +42,7 @@
     "helmet": "^3.21.2",
     "http": "0.0.0",
     "joi": "14.3.0",
-    "jsonwebtoken": "8.5.1",
+    "jsonwebtoken": "9.0.0",
     "mongoose": "^5.7.7",
     "pushy": "^2.0.8",
     "util": "0.11.1"
